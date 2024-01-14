@@ -4,6 +4,7 @@
 format: jb-book
 root: intro
 chapters:
+- file: syllabus.ipynb
 - file: 00-introduction/introduction.ipynb
 - file: 01-numpy/numpy.ipynb
 - file: 02-pandas-intro/pandas-intro.ipynb
