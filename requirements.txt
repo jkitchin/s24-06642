@@ -1,0 +1,10 @@
+jupyter-book==0.12.3
+matplotlib
+numpy
+ghp-import
+ase
+pydotplus
+jupyter_black
+pandas
+scikit-learn
+xlrd

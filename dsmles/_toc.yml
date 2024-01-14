@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: 00-introduction/introduction.ipynb
+- file: 01-numpy/numpy.ipynb
+- file: 02-pandas-intro/pandas-intro.ipynb
+- file: 03-intermediate-pandas/intermediate-pandas.ipynb
+- file: 04-pandas-database/pandas-database.ipynb
+- file: 05-linear-regression/linear-regression.ipynb
+- file: 06-intermediate-sklearn/intermediate-sklearn.ipynb
+- file: 07-nonlinear-sklearn/nonlinear-sklearn.ipynb
+- file: 08-random-forests/random-forests.ipynb
+- file: 09-custom-estimators/custom-estimators.ipynb
+- file: summary.md
+- file: genindex.md
