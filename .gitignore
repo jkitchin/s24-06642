@@ -1,4 +1,1 @@
-_build
-.DS_STORE
-.virtual_documents
-.jupyter_ystore.db
+.ipynb_checkpoints
