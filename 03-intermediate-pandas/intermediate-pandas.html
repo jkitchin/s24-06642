@@ -1,0 +1,2342 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intermediate Pandas &#8212; Data science and machine learning in science and engineering</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jkitchin/dsmles");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Pandas DataFrames as a small database" href="../04-pandas-database/pandas-database.html" />
+    <link rel="prev" title="Introduction to Pandas" href="../02-pandas-intro/pandas-intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data science and machine learning in science and engineering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus for  06-642 Data Science and Machine Learning in Chemical Engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-introduction/introduction.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01-numpy/numpy.html">
+   Introduction to data files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02-pandas-intro/pandas-intro.html">
+   Introduction to Pandas
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Intermediate Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04-pandas-database/pandas-database.html">
+   Using Pandas DataFrames as a small database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05-linear-regression/linear-regression.html">
+   Introduction to data-driven model development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06-intermediate-sklearn/intermediate-sklearn.html">
+   Intermediate scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07-nonlinear-sklearn/nonlinear-sklearn.html">
+   Nonlinear models in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08-random-forests/random-forests.html">
+   Decision Trees and Random Forests Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09-custom-estimators/custom-estimators.html">
+   Building custom estimators in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary.html">
+   Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/03-intermediate-pandas/intermediate-pandas.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jkitchin/s24-06642"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jkitchin/s24-06642/issues/new?title=Issue%20on%20page%20%2F03-intermediate-pandas/intermediate-pandas.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jkitchin/s24-06642/main?urlpath=lab/tree/dsmles/03-intermediate-pandas/intermediate-pandas.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://jupyterhub-dev.cheme.cmu.edu/hub/user-redirect/git-pull?repo=https://github.com/jkitchin/s24-06642&urlpath=lab/tree/s24-06642/dsmles/03-intermediate-pandas/intermediate-pandas.ipynb&branch=main"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/jkitchin/s24-06642/blob/main/dsmles/03-intermediate-pandas/intermediate-pandas.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#revisiting-a-previous-example-with-batches-of-data">
+   Revisiting a previous example with batches of data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combining-data-sets">
+   Combining data sets
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Intermediate Pandas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#revisiting-a-previous-example-with-batches-of-data">
+   Revisiting a previous example with batches of data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combining-data-sets">
+   Combining data sets
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="intermediate-pandas">
+<h1>Intermediate Pandas<a class="headerlink" href="#intermediate-pandas" title="Permalink to this headline">¶</a></h1>
+<p>Today we look at some ways to use Pandas DataFrames like databases.</p>
+<div class="section" id="revisiting-a-previous-example-with-batches-of-data">
+<h2>Revisiting a previous example with batches of data<a class="headerlink" href="#revisiting-a-previous-example-with-batches-of-data" title="Permalink to this headline">¶</a></h2>
+<p>We start with the example we looked at before. It is a dataset from a set of experiments. The experiments are grouped by the Day they were run on. We will use Pandas to do some analysis by the day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;p-t.dat&quot;</span><span class="p">,</span>
+    <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span>
+    <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Run order&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Day&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ambient Temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Pressure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Fitted Value&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Residual&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Run order</th>
+      <th>Day</th>
+      <th>Ambient Temperature</th>
+      <th>Temperature</th>
+      <th>Pressure</th>
+      <th>Fitted Value</th>
+      <th>Residual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>23.820</td>
+      <td>54.749</td>
+      <td>225.066</td>
+      <td>222.920</td>
+      <td>2.146</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>24.120</td>
+      <td>23.323</td>
+      <td>100.331</td>
+      <td>99.411</td>
+      <td>0.920</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>23.434</td>
+      <td>58.775</td>
+      <td>230.863</td>
+      <td>238.744</td>
+      <td>-7.881</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>23.993</td>
+      <td>25.854</td>
+      <td>106.160</td>
+      <td>109.359</td>
+      <td>-3.199</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>23.375</td>
+      <td>68.297</td>
+      <td>277.502</td>
+      <td>276.165</td>
+      <td>1.336</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>1</td>
+      <td>23.233</td>
+      <td>37.481</td>
+      <td>148.314</td>
+      <td>155.056</td>
+      <td>-6.741</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1</td>
+      <td>24.162</td>
+      <td>49.542</td>
+      <td>197.562</td>
+      <td>202.456</td>
+      <td>-4.895</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>1</td>
+      <td>23.667</td>
+      <td>34.101</td>
+      <td>138.537</td>
+      <td>141.770</td>
+      <td>-3.232</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>1</td>
+      <td>24.056</td>
+      <td>33.901</td>
+      <td>137.969</td>
+      <td>140.983</td>
+      <td>-3.014</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>1</td>
+      <td>22.786</td>
+      <td>29.242</td>
+      <td>117.410</td>
+      <td>122.674</td>
+      <td>-5.263</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>2</td>
+      <td>23.785</td>
+      <td>39.506</td>
+      <td>164.442</td>
+      <td>163.013</td>
+      <td>1.429</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>2</td>
+      <td>22.987</td>
+      <td>43.004</td>
+      <td>181.044</td>
+      <td>176.759</td>
+      <td>4.285</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>2</td>
+      <td>23.799</td>
+      <td>53.226</td>
+      <td>222.179</td>
+      <td>216.933</td>
+      <td>5.246</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>2</td>
+      <td>23.661</td>
+      <td>54.467</td>
+      <td>227.010</td>
+      <td>221.813</td>
+      <td>5.198</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>2</td>
+      <td>23.852</td>
+      <td>57.549</td>
+      <td>232.496</td>
+      <td>233.925</td>
+      <td>-1.429</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>2</td>
+      <td>23.379</td>
+      <td>61.204</td>
+      <td>253.557</td>
+      <td>248.288</td>
+      <td>5.269</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>2</td>
+      <td>24.146</td>
+      <td>31.489</td>
+      <td>139.894</td>
+      <td>131.506</td>
+      <td>8.388</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>2</td>
+      <td>24.187</td>
+      <td>68.476</td>
+      <td>273.931</td>
+      <td>276.871</td>
+      <td>-2.940</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>2</td>
+      <td>24.159</td>
+      <td>51.144</td>
+      <td>207.969</td>
+      <td>208.753</td>
+      <td>-0.784</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>2</td>
+      <td>23.803</td>
+      <td>68.774</td>
+      <td>280.205</td>
+      <td>278.040</td>
+      <td>2.165</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>3</td>
+      <td>24.381</td>
+      <td>55.350</td>
+      <td>227.060</td>
+      <td>225.282</td>
+      <td>1.779</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>3</td>
+      <td>24.027</td>
+      <td>44.692</td>
+      <td>180.605</td>
+      <td>183.396</td>
+      <td>-2.791</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>3</td>
+      <td>24.342</td>
+      <td>50.995</td>
+      <td>206.229</td>
+      <td>208.167</td>
+      <td>-1.938</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>3</td>
+      <td>23.670</td>
+      <td>21.602</td>
+      <td>91.464</td>
+      <td>92.649</td>
+      <td>-1.186</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>3</td>
+      <td>24.246</td>
+      <td>54.673</td>
+      <td>223.869</td>
+      <td>222.622</td>
+      <td>1.247</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>26</td>
+      <td>3</td>
+      <td>25.082</td>
+      <td>41.449</td>
+      <td>172.910</td>
+      <td>170.651</td>
+      <td>2.259</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27</td>
+      <td>3</td>
+      <td>24.575</td>
+      <td>35.451</td>
+      <td>152.073</td>
+      <td>147.075</td>
+      <td>4.998</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>3</td>
+      <td>23.803</td>
+      <td>42.989</td>
+      <td>169.427</td>
+      <td>176.703</td>
+      <td>-7.276</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>3</td>
+      <td>24.660</td>
+      <td>48.599</td>
+      <td>192.561</td>
+      <td>198.748</td>
+      <td>-6.188</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>3</td>
+      <td>24.097</td>
+      <td>21.448</td>
+      <td>94.448</td>
+      <td>92.042</td>
+      <td>2.406</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>31</td>
+      <td>4</td>
+      <td>22.816</td>
+      <td>56.982</td>
+      <td>222.794</td>
+      <td>231.697</td>
+      <td>-8.902</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>32</td>
+      <td>4</td>
+      <td>24.167</td>
+      <td>47.901</td>
+      <td>199.003</td>
+      <td>196.008</td>
+      <td>2.996</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33</td>
+      <td>4</td>
+      <td>22.712</td>
+      <td>40.285</td>
+      <td>168.668</td>
+      <td>166.077</td>
+      <td>2.592</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>34</td>
+      <td>4</td>
+      <td>23.611</td>
+      <td>25.609</td>
+      <td>109.387</td>
+      <td>108.397</td>
+      <td>0.990</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>35</td>
+      <td>4</td>
+      <td>23.354</td>
+      <td>22.971</td>
+      <td>98.445</td>
+      <td>98.029</td>
+      <td>0.416</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36</td>
+      <td>4</td>
+      <td>23.669</td>
+      <td>25.838</td>
+      <td>110.987</td>
+      <td>109.295</td>
+      <td>1.692</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>37</td>
+      <td>4</td>
+      <td>23.965</td>
+      <td>49.127</td>
+      <td>202.662</td>
+      <td>200.826</td>
+      <td>1.835</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>4</td>
+      <td>22.917</td>
+      <td>54.936</td>
+      <td>224.773</td>
+      <td>223.653</td>
+      <td>1.120</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>39</td>
+      <td>4</td>
+      <td>23.546</td>
+      <td>50.917</td>
+      <td>216.058</td>
+      <td>207.859</td>
+      <td>8.199</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>4</td>
+      <td>24.450</td>
+      <td>41.976</td>
+      <td>171.469</td>
+      <td>172.720</td>
+      <td>-1.251</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The first aggregation we will look at is how to make groups of data that are related by values in a column.  We use the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> function (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby</a>), and specify a column to group on. The result is a <code class="docutils literal notranslate"><span class="pre">DataFrameGroupBy</span></code> object, which we next have to work with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Day&quot;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.groupby.generic.DataFrameGroupBy
+</pre></div>
+</div>
+</div>
+</div>
+<p>The groups can describe themselves. Here we see we get 4 groups, one for each day, and you can see some statistics about each group. We do not need those for now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="8" halign="left">Run order</th>
+      <th colspan="2" halign="left">Ambient Temperature</th>
+      <th>...</th>
+      <th colspan="2" halign="left">Fitted Value</th>
+      <th colspan="8" halign="left">Residual</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>...</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>Day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>10.0</td>
+      <td>5.5</td>
+      <td>3.02765</td>
+      <td>1.0</td>
+      <td>3.25</td>
+      <td>5.5</td>
+      <td>7.75</td>
+      <td>10.0</td>
+      <td>10.0</td>
+      <td>23.6646</td>
+      <td>...</td>
+      <td>217.80400</td>
+      <td>276.165</td>
+      <td>10.0</td>
+      <td>-2.9823</td>
+      <td>3.452383</td>
+      <td>-7.881</td>
+      <td>-5.17100</td>
+      <td>-3.2155</td>
+      <td>-0.06350</td>
+      <td>2.146</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10.0</td>
+      <td>15.5</td>
+      <td>3.02765</td>
+      <td>11.0</td>
+      <td>13.25</td>
+      <td>15.5</td>
+      <td>17.75</td>
+      <td>20.0</td>
+      <td>10.0</td>
+      <td>23.7758</td>
+      <td>...</td>
+      <td>244.69725</td>
+      <td>278.040</td>
+      <td>10.0</td>
+      <td>2.6827</td>
+      <td>3.606824</td>
+      <td>-2.940</td>
+      <td>-0.23075</td>
+      <td>3.2250</td>
+      <td>5.23400</td>
+      <td>8.388</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10.0</td>
+      <td>25.5</td>
+      <td>3.02765</td>
+      <td>21.0</td>
+      <td>23.25</td>
+      <td>25.5</td>
+      <td>27.75</td>
+      <td>30.0</td>
+      <td>10.0</td>
+      <td>24.2883</td>
+      <td>...</td>
+      <td>205.81225</td>
+      <td>225.282</td>
+      <td>10.0</td>
+      <td>-0.6690</td>
+      <td>3.948274</td>
+      <td>-7.276</td>
+      <td>-2.57775</td>
+      <td>0.0305</td>
+      <td>2.13900</td>
+      <td>4.998</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10.0</td>
+      <td>35.5</td>
+      <td>3.02765</td>
+      <td>31.0</td>
+      <td>33.25</td>
+      <td>35.5</td>
+      <td>37.75</td>
+      <td>40.0</td>
+      <td>10.0</td>
+      <td>23.5207</td>
+      <td>...</td>
+      <td>206.10075</td>
+      <td>231.697</td>
+      <td>10.0</td>
+      <td>0.9687</td>
+      <td>4.255487</td>
+      <td>-8.902</td>
+      <td>0.55950</td>
+      <td>1.4060</td>
+      <td>2.40275</td>
+      <td>8.199</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 48 columns</p>
+</div></div></div>
+</div>
+<p>We can get a dictionary of the group names and labels from the groups attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="o">.</span><span class="n">groups</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 2: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 3: [20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 4: [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get the subset of rows from those group labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">groups</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Run order</th>
+      <th>Day</th>
+      <th>Ambient Temperature</th>
+      <th>Temperature</th>
+      <th>Pressure</th>
+      <th>Fitted Value</th>
+      <th>Residual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>2</td>
+      <td>23.785</td>
+      <td>39.506</td>
+      <td>164.442</td>
+      <td>163.013</td>
+      <td>1.429</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>2</td>
+      <td>22.987</td>
+      <td>43.004</td>
+      <td>181.044</td>
+      <td>176.759</td>
+      <td>4.285</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>2</td>
+      <td>23.799</td>
+      <td>53.226</td>
+      <td>222.179</td>
+      <td>216.933</td>
+      <td>5.246</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>2</td>
+      <td>23.661</td>
+      <td>54.467</td>
+      <td>227.010</td>
+      <td>221.813</td>
+      <td>5.198</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>2</td>
+      <td>23.852</td>
+      <td>57.549</td>
+      <td>232.496</td>
+      <td>233.925</td>
+      <td>-1.429</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>2</td>
+      <td>23.379</td>
+      <td>61.204</td>
+      <td>253.557</td>
+      <td>248.288</td>
+      <td>5.269</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>2</td>
+      <td>24.146</td>
+      <td>31.489</td>
+      <td>139.894</td>
+      <td>131.506</td>
+      <td>8.388</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>2</td>
+      <td>24.187</td>
+      <td>68.476</td>
+      <td>273.931</td>
+      <td>276.871</td>
+      <td>-2.940</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>2</td>
+      <td>24.159</td>
+      <td>51.144</td>
+      <td>207.969</td>
+      <td>208.753</td>
+      <td>-0.784</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>2</td>
+      <td>23.803</td>
+      <td>68.774</td>
+      <td>280.205</td>
+      <td>278.040</td>
+      <td>2.165</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We don’t usually work with groups that way though, it is more common to do some analysis on each group.</p>
+<p>Suppose we want to plot the Pressure vs Temperature for each group, so we can see visually if there are any trends that could be attributed to the group. To do this, we need to <em>iterate</em> over the groups and then make a plot on each one.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">DataFrameGroupBy</span></code> is <em>iterable</em> and when you loop over it, you get the <code class="docutils literal notranslate"><span class="pre">key</span></code> it was grouped on, and a DataFrame that contains the items in the group. Here we loop over each group, and plot each group with a different color.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">day</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;Pressure&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pressure&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/intermediate-pandas_14_0.png" src="../_images/intermediate-pandas_14_0.png" />
+</div>
+</div>
+<p>the point of this is we cannot see a visual clustering of the groups by day. That is important, because if we did it could suggest something was different that day.</p>
+</div>
+<div class="section" id="combining-data-sets">
+<h2>Combining data sets<a class="headerlink" href="#combining-data-sets" title="Permalink to this headline">¶</a></h2>
+<p>Siddhant Lambor provided from two experiments conducted to measure the properties of a worm-like micelles solution. He had carried out experiments on a rheometer to measure the viscosity of a worm-like micelles solution in a Couette cell geometry and a Cone and Plate geometry. Ideally, there should not be a difference as viscosity is intrinsic to the fluid. Analysis of this data will confirm if that is true. First, we read this data in from the two data files.</p>
+<ul class="simple">
+<li><p><span class="xref myst">cp.xlsx</span> Cone and plate data</p></li>
+<li><p><span class="xref myst">couette.xlsx</span> Couette data</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">couette</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
+    <span class="s2">&quot;couette.xls&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Flow sweep - 1&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>  <span class="c1"># sheet name is case sensitive, excel file name is not</span>
+
+<span class="n">couette</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+      <th>Step time</th>
+      <th>Temperature</th>
+      <th>Normal stress</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Pa</td>
+      <td>1/s</td>
+      <td>Pa.s</td>
+      <td>s</td>
+      <td>°C</td>
+      <td>Pa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.009981</td>
+      <td>0.04953</td>
+      <td>0.201504</td>
+      <td>35.1469</td>
+      <td>25.001</td>
+      <td>-0.001263</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015817</td>
+      <td>0.079875</td>
+      <td>0.198028</td>
+      <td>70.1689</td>
+      <td>25.001</td>
+      <td>-0.000835</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025071</td>
+      <td>0.127313</td>
+      <td>0.196926</td>
+      <td>105.253</td>
+      <td>25</td>
+      <td>-0.000913</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039734</td>
+      <td>0.204094</td>
+      <td>0.194685</td>
+      <td>140.26</td>
+      <td>25</td>
+      <td>-0.001132</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062977</td>
+      <td>0.327253</td>
+      <td>0.192442</td>
+      <td>175.313</td>
+      <td>25</td>
+      <td>-0.002026</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.099806</td>
+      <td>0.530364</td>
+      <td>0.188183</td>
+      <td>210.32</td>
+      <td>24.998</td>
+      <td>-0.002429</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.158165</td>
+      <td>0.875494</td>
+      <td>0.180658</td>
+      <td>245.373</td>
+      <td>25</td>
+      <td>-0.001837</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.250637</td>
+      <td>1.49135</td>
+      <td>0.168061</td>
+      <td>280.426</td>
+      <td>25.002</td>
+      <td>-0.001655</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.397131</td>
+      <td>2.64707</td>
+      <td>0.150027</td>
+      <td>315.433</td>
+      <td>25.001</td>
+      <td>-0.001889</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.629111</td>
+      <td>5.00904</td>
+      <td>0.125595</td>
+      <td>350.501</td>
+      <td>25.003</td>
+      <td>-0.002233</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.996153</td>
+      <td>10.3993</td>
+      <td>0.09579</td>
+      <td>385.508</td>
+      <td>24.996</td>
+      <td>-0.001807</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1.57528</td>
+      <td>24.5624</td>
+      <td>0.064134</td>
+      <td>420.608</td>
+      <td>24.998</td>
+      <td>-0.001823</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.47652</td>
+      <td>67.2972</td>
+      <td>0.0368</td>
+      <td>455.63</td>
+      <td>25.003</td>
+      <td>-0.00182</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3.75092</td>
+      <td>210.991</td>
+      <td>0.017778</td>
+      <td>490.668</td>
+      <td>25</td>
+      <td>-0.002939</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can drop the row at index 0, it just has the units in it. With this syntax, we have to save the resulting DataFrame back into the variable, or it will not be changed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">couette</span> <span class="o">=</span> <span class="n">couette</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">couette</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+      <th>Step time</th>
+      <th>Temperature</th>
+      <th>Normal stress</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.009981</td>
+      <td>0.04953</td>
+      <td>0.201504</td>
+      <td>35.1469</td>
+      <td>25.001</td>
+      <td>-0.001263</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015817</td>
+      <td>0.079875</td>
+      <td>0.198028</td>
+      <td>70.1689</td>
+      <td>25.001</td>
+      <td>-0.000835</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025071</td>
+      <td>0.127313</td>
+      <td>0.196926</td>
+      <td>105.253</td>
+      <td>25</td>
+      <td>-0.000913</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039734</td>
+      <td>0.204094</td>
+      <td>0.194685</td>
+      <td>140.26</td>
+      <td>25</td>
+      <td>-0.001132</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062977</td>
+      <td>0.327253</td>
+      <td>0.192442</td>
+      <td>175.313</td>
+      <td>25</td>
+      <td>-0.002026</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.099806</td>
+      <td>0.530364</td>
+      <td>0.188183</td>
+      <td>210.32</td>
+      <td>24.998</td>
+      <td>-0.002429</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.158165</td>
+      <td>0.875494</td>
+      <td>0.180658</td>
+      <td>245.373</td>
+      <td>25</td>
+      <td>-0.001837</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.250637</td>
+      <td>1.49135</td>
+      <td>0.168061</td>
+      <td>280.426</td>
+      <td>25.002</td>
+      <td>-0.001655</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.397131</td>
+      <td>2.64707</td>
+      <td>0.150027</td>
+      <td>315.433</td>
+      <td>25.001</td>
+      <td>-0.001889</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.629111</td>
+      <td>5.00904</td>
+      <td>0.125595</td>
+      <td>350.501</td>
+      <td>25.003</td>
+      <td>-0.002233</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.996153</td>
+      <td>10.3993</td>
+      <td>0.09579</td>
+      <td>385.508</td>
+      <td>24.996</td>
+      <td>-0.001807</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1.57528</td>
+      <td>24.5624</td>
+      <td>0.064134</td>
+      <td>420.608</td>
+      <td>24.998</td>
+      <td>-0.001823</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.47652</td>
+      <td>67.2972</td>
+      <td>0.0368</td>
+      <td>455.63</td>
+      <td>25.003</td>
+      <td>-0.00182</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3.75092</td>
+      <td>210.991</td>
+      <td>0.017778</td>
+      <td>490.668</td>
+      <td>25</td>
+      <td>-0.002939</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>There is a second file called cp.xls we want to combine with this. Here, we combine the drop function all into one line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conePlate</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;cp.xls&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Flow sweep - 1&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">conePlate</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+      <th>Step time</th>
+      <th>Temperature</th>
+      <th>Normal stress</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.009984</td>
+      <td>0.053193</td>
+      <td>0.187693</td>
+      <td>34.9909</td>
+      <td>25</td>
+      <td>1.2658</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015822</td>
+      <td>0.082</td>
+      <td>0.19295</td>
+      <td>70.0909</td>
+      <td>25.001</td>
+      <td>0.569149</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025078</td>
+      <td>0.129969</td>
+      <td>0.192952</td>
+      <td>105.16</td>
+      <td>25</td>
+      <td>0.295899</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039759</td>
+      <td>0.20176</td>
+      <td>0.19706</td>
+      <td>140.213</td>
+      <td>25</td>
+      <td>1.0171</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062988</td>
+      <td>0.336087</td>
+      <td>0.187415</td>
+      <td>175.282</td>
+      <td>25</td>
+      <td>0.546196</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For this analysis, we are only interested in the shear rate, stress and viscosity values. Let us drop the other columns. We do that by the names, and specify inplace=True, which modifies the DataFrame itself.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conePlate</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;Step time&quot;</span><span class="p">,</span> <span class="s2">&quot;Normal stress&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># if we do not use inplace=True, the data frame will not be changed. It would by default create a new data frame</span>
+<span class="c1"># and we would have to assign a different variable to capture this change.</span>
+<span class="n">conePlate</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.009984</td>
+      <td>0.053193</td>
+      <td>0.187693</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015822</td>
+      <td>0.082</td>
+      <td>0.19295</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025078</td>
+      <td>0.129969</td>
+      <td>0.192952</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039759</td>
+      <td>0.20176</td>
+      <td>0.19706</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062988</td>
+      <td>0.336087</td>
+      <td>0.187415</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We also do that for the couette data. Here we did not use <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>, so we have to save the result back into the variable to get the change.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">couette</span> <span class="o">=</span> <span class="n">couette</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;Step time&quot;</span><span class="p">,</span> <span class="s2">&quot;Normal stress&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>  <span class="c1"># without using inplace = True</span>
+<span class="n">couette</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.009981</td>
+      <td>0.04953</td>
+      <td>0.201504</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015817</td>
+      <td>0.079875</td>
+      <td>0.198028</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025071</td>
+      <td>0.127313</td>
+      <td>0.196926</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039734</td>
+      <td>0.204094</td>
+      <td>0.194685</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062977</td>
+      <td>0.327253</td>
+      <td>0.192442</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can see info about each DataFrame like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">couette</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 14 entries, 1 to 14
+Data columns (total 3 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   Stress      14 non-null     object
+ 1   Shear rate  14 non-null     object
+ 2   Viscosity   14 non-null     object
+dtypes: object(3)
+memory usage: 468.0+ bytes
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conePlate</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 17 entries, 1 to 17
+Data columns (total 3 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   Stress      17 non-null     object
+ 1   Shear rate  17 non-null     object
+ 2   Viscosity   17 non-null     object
+dtypes: object(3)
+memory usage: 540.0+ bytes
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could proceed to analyze the DataFrames separately, but instead, we will combine them into one DataFrame. Before doing that, we need to add a column to each one so we know which data set is which. Simply assigning a value to a new column name will do that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">couette</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;couette&quot;</span>
+<span class="n">couette</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.009981</td>
+      <td>0.04953</td>
+      <td>0.201504</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015817</td>
+      <td>0.079875</td>
+      <td>0.198028</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025071</td>
+      <td>0.127313</td>
+      <td>0.196926</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039734</td>
+      <td>0.204094</td>
+      <td>0.194685</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062977</td>
+      <td>0.327253</td>
+      <td>0.192442</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.099806</td>
+      <td>0.530364</td>
+      <td>0.188183</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.158165</td>
+      <td>0.875494</td>
+      <td>0.180658</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.250637</td>
+      <td>1.49135</td>
+      <td>0.168061</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.397131</td>
+      <td>2.64707</td>
+      <td>0.150027</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.629111</td>
+      <td>5.00904</td>
+      <td>0.125595</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.996153</td>
+      <td>10.3993</td>
+      <td>0.09579</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1.57528</td>
+      <td>24.5624</td>
+      <td>0.064134</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.47652</td>
+      <td>67.2972</td>
+      <td>0.0368</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3.75092</td>
+      <td>210.991</td>
+      <td>0.017778</td>
+      <td>couette</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conePlate</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;cone&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can combine these into a single DataFrame. This is not critical, and you can get by without it, but I want to explore the idea, and illustrate it is possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">conePlate</span><span class="p">,</span> <span class="n">couette</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Stress</th>
+      <th>Shear rate</th>
+      <th>Viscosity</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.009984</td>
+      <td>0.053193</td>
+      <td>0.187693</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015822</td>
+      <td>0.082</td>
+      <td>0.19295</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025078</td>
+      <td>0.129969</td>
+      <td>0.192952</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039759</td>
+      <td>0.20176</td>
+      <td>0.19706</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062988</td>
+      <td>0.336087</td>
+      <td>0.187415</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.09982</td>
+      <td>0.556749</td>
+      <td>0.179291</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.15819</td>
+      <td>0.925403</td>
+      <td>0.170942</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.250701</td>
+      <td>1.57526</td>
+      <td>0.159148</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.397263</td>
+      <td>2.782</td>
+      <td>0.142798</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.629346</td>
+      <td>5.16333</td>
+      <td>0.121888</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.996863</td>
+      <td>10.4029</td>
+      <td>0.095826</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1.57768</td>
+      <td>23.6558</td>
+      <td>0.066693</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.49053</td>
+      <td>62.5901</td>
+      <td>0.039791</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3.85502</td>
+      <td>194.265</td>
+      <td>0.019844</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>5.45425</td>
+      <td>795.474</td>
+      <td>0.006857</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>8.62182</td>
+      <td>2011.14</td>
+      <td>0.004287</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>13.7498</td>
+      <td>3633.47</td>
+      <td>0.003784</td>
+      <td>cone</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.009981</td>
+      <td>0.04953</td>
+      <td>0.201504</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.015817</td>
+      <td>0.079875</td>
+      <td>0.198028</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.025071</td>
+      <td>0.127313</td>
+      <td>0.196926</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.039734</td>
+      <td>0.204094</td>
+      <td>0.194685</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.062977</td>
+      <td>0.327253</td>
+      <td>0.192442</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.099806</td>
+      <td>0.530364</td>
+      <td>0.188183</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.158165</td>
+      <td>0.875494</td>
+      <td>0.180658</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.250637</td>
+      <td>1.49135</td>
+      <td>0.168061</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.397131</td>
+      <td>2.64707</td>
+      <td>0.150027</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.629111</td>
+      <td>5.00904</td>
+      <td>0.125595</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.996153</td>
+      <td>10.3993</td>
+      <td>0.09579</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1.57528</td>
+      <td>24.5624</td>
+      <td>0.064134</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2.47652</td>
+      <td>67.2972</td>
+      <td>0.0368</td>
+      <td>couette</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3.75092</td>
+      <td>210.991</td>
+      <td>0.017778</td>
+      <td>couette</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Finally, we are ready for the visualization. We will group the DataFrame and then make plots for each group. Here we illustrate several new arguments, including loglog plots, secondary axes, colored tick labels, and multiple legends.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;cone&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="s2">&quot;Shear rate&quot;</span><span class="p">,</span> <span class="s2">&quot;Viscosity&quot;</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;b.-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CP viscosity&quot;</span>
+<span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;couette&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="s2">&quot;Shear rate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Viscosity&quot;</span><span class="p">,</span>
+    <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;g.-&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Couette viscosity&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;cone&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="s2">&quot;Shear rate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Stress&quot;</span><span class="p">,</span>
+    <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;r.-&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CP stress&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s2">&quot;couette&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="s2">&quot;Shear rate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Stress&quot;</span><span class="p">,</span>
+    <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">logx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;y.&quot;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Couette Stress&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Setting y axis labels</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Viscosity (Pa.s)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">ticklabel</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ticklabel</span> <span class="ow">in</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">()]</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Stress (Pa)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">ticklabel</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ticklabel</span> <span class="ow">in</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">()]</span>
+
+<span class="c1"># setting legend locations</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Shear rate (1/s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparison of Cone and Plate with Couette Cell&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Comparison of Cone and Plate with Couette Cell&#39;)
+</pre></div>
+</div>
+<img alt="../_images/intermediate-pandas_36_1.png" src="../_images/intermediate-pandas_36_1.png" />
+</div>
+</div>
+<p>So, in fact we can see these two experiments are practically equivalent.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./03-intermediate-pandas"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../02-pandas-intro/pandas-intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction to Pandas</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../04-pandas-database/pandas-database.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using Pandas DataFrames as a small database</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By John Kitchin<br/>
+    
+        &copy; Copyright 2023.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

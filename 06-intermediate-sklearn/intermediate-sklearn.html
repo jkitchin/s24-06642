@@ -1,0 +1,1023 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intermediate scikit-learn &#8212; Data science and machine learning in science and engineering</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jkitchin/dsmles");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nonlinear models in sklearn" href="../07-nonlinear-sklearn/nonlinear-sklearn.html" />
+    <link rel="prev" title="Introduction to data-driven model development" href="../05-linear-regression/linear-regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data science and machine learning in science and engineering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus for  06-642 Data Science and Machine Learning in Chemical Engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-introduction/introduction.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01-numpy/numpy.html">
+   Introduction to data files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02-pandas-intro/pandas-intro.html">
+   Introduction to Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03-intermediate-pandas/intermediate-pandas.html">
+   Intermediate Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04-pandas-database/pandas-database.html">
+   Using Pandas DataFrames as a small database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05-linear-regression/linear-regression.html">
+   Introduction to data-driven model development
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Intermediate scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07-nonlinear-sklearn/nonlinear-sklearn.html">
+   Nonlinear models in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08-random-forests/random-forests.html">
+   Decision Trees and Random Forests Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09-custom-estimators/custom-estimators.html">
+   Building custom estimators in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary.html">
+   Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/06-intermediate-sklearn/intermediate-sklearn.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jkitchin/s24-06642"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jkitchin/s24-06642/issues/new?title=Issue%20on%20page%20%2F06-intermediate-sklearn/intermediate-sklearn.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jkitchin/s24-06642/main?urlpath=lab/tree/dsmles/06-intermediate-sklearn/intermediate-sklearn.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://jupyterhub-dev.cheme.cmu.edu/hub/user-redirect/git-pull?repo=https://github.com/jkitchin/s24-06642&urlpath=lab/tree/s24-06642/dsmles/06-intermediate-sklearn/intermediate-sklearn.ipynb&branch=main"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/jkitchin/s24-06642/blob/main/dsmles/06-intermediate-sklearn/intermediate-sklearn.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preprocessing">
+   Data preprocessing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pipeline">
+     Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-fold-validation-cross-validation">
+   k-fold validation / cross-validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameter-optimization">
+   Hyperparameter optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Intermediate scikit-learn</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preprocessing">
+   Data preprocessing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pipeline">
+     Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-fold-validation-cross-validation">
+   k-fold validation / cross-validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameter-optimization">
+   Hyperparameter optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="intermediate-scikit-learn">
+<h1>Intermediate scikit-learn<a class="headerlink" href="#intermediate-scikit-learn" title="Permalink to this headline">¶</a></h1>
+<p>Today we examine a few important ideas in data science and machine learning. They are:</p>
+<ol class="simple">
+<li><p>Data preprocessing. We mostly focus on how to scale data so that each feature has about the same scale.</p></li>
+<li><p>How to combine many data processing/fitting steps into a pipeline that is easy to work with</p></li>
+<li><p>How to use k-fold validation to make sure your model fit doesn’t depend too much on one data set sample.</p></li>
+<li><p>Automating the optimization of model parameters using cross-validation.</p></li>
+</ol>
+<div class="section" id="data-preprocessing">
+<h2>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>When your features have varying orders of magnitude, it is often a good idea to standardize them. That makes each feature have a similar importance. Some algorithms even expect that the input features have been standardized (e.g. PCA, and many kinds of regularization). The two most common approaches are:</p>
+<ul class="simple">
+<li><p><strong>zero-mean, unit variance:</strong> You subtract the mean of each column, and normalize by the variance of the column</p></li>
+<li><p><strong>min-max:</strong> you scale the column so that the minimum value maps to a constant (often 0 or -1), and the maximum value maps to a constant (often 1).</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> provides a <a class="reference external" href="https://scikit-learn.org/stable/modules/preprocessing.html">preprocessing</a> module to make this “simple”.</p>
+<p id="index-0">We will explore this with this data set which represents the energy of a Cu dimer as a function of the distance between the two atoms. Our goal is to develop a model that fits this. We know some physics about this system, and that is as the atoms approach each other, they should strongly repel each other, and the energy would go to infinity, and as the atoms get far apart, they cannot interact, so the energy should go to a constant. You might think the energy should go to zero,, but this depends on what reference system the energy zero is defined for. The zero in this system is defined as the minimum energy for <em>bulk</em> Cu in an fcc unit cell. So, this system levels out at an energy that is much higher than that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;distance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/intermediate-sklearn_4_0.png" src="../_images/intermediate-sklearn_4_0.png" />
+</div>
+</div>
+<p>First, let’s make some columns. Instead of manually creating these, let’s leverage the capability of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to build the features for us. Here is an example of a second order polynomial.</p>
+<div class="cell docutils container" id="index-1">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        ,  1.8       ,  3.24      ],
+       [ 1.        ,  1.80416667,  3.25501736],
+       [ 1.        ,  1.80833333,  3.27006944],
+       [ 1.        ,  1.8125    ,  3.28515625],
+       [ 1.        ,  1.81666667,  3.30027778],
+       [ 1.        ,  1.82083333,  3.31543403],
+       [ 1.        ,  1.825     ,  3.330625  ],
+       [ 1.        ,  1.82916667,  3.34585069],
+       [ 1.        ,  1.83333333,  3.36111111],
+       [ 1.        ,  1.8375    ,  3.37640625],
+       [ 1.        ,  1.84166667,  3.39173611],
+       [ 1.        ,  1.84583333,  3.40710069],
+       [ 1.        ,  1.85      ,  3.4225    ],
+       [ 1.        ,  1.85416667,  3.43793403],
+       [ 1.        ,  1.85833333,  3.45340278],
+       [ 1.        ,  1.8625    ,  3.46890625],
+       [ 1.        ,  1.86666667,  3.48444444],
+       [ 1.        ,  1.87083333,  3.50001736],
+       [ 1.        ,  1.875     ,  3.515625  ],
+       [ 1.        ,  1.87916667,  3.53126736],
+       [ 1.        ,  1.88333333,  3.54694444],
+       [ 1.        ,  1.8875    ,  3.56265625],
+       [ 1.        ,  1.89166667,  3.57840278],
+       [ 1.        ,  1.89583333,  3.59418403],
+       [ 1.        ,  1.9       ,  3.61      ],
+       [ 1.        ,  2.3       ,  5.29      ],
+       [ 1.        ,  2.32083333,  5.38626736],
+       [ 1.        ,  2.34166667,  5.48340278],
+       [ 1.        ,  2.3625    ,  5.58140625],
+       [ 1.        ,  2.38333333,  5.68027778],
+       [ 1.        ,  2.40416667,  5.78001736],
+       [ 1.        ,  2.425     ,  5.880625  ],
+       [ 1.        ,  2.44583333,  5.98210069],
+       [ 1.        ,  2.46666667,  6.08444444],
+       [ 1.        ,  2.4875    ,  6.18765625],
+       [ 1.        ,  2.50833333,  6.29173611],
+       [ 1.        ,  2.52916667,  6.39668403],
+       [ 1.        ,  2.55      ,  6.5025    ],
+       [ 1.        ,  2.57083333,  6.60918403],
+       [ 1.        ,  2.59166667,  6.71673611],
+       [ 1.        ,  2.6125    ,  6.82515625],
+       [ 1.        ,  2.63333333,  6.93444444],
+       [ 1.        ,  2.65416667,  7.04460069],
+       [ 1.        ,  2.675     ,  7.155625  ],
+       [ 1.        ,  2.69583333,  7.26751736],
+       [ 1.        ,  2.71666667,  7.38027778],
+       [ 1.        ,  2.7375    ,  7.49390625],
+       [ 1.        ,  2.75833333,  7.60840278],
+       [ 1.        ,  2.77916667,  7.72376736],
+       [ 1.        ,  2.8       ,  7.84      ],
+       [ 1.        ,  4.        , 16.        ],
+       [ 1.        ,  4.025     , 16.200625  ],
+       [ 1.        ,  4.05      , 16.4025    ],
+       [ 1.        ,  4.075     , 16.605625  ],
+       [ 1.        ,  4.1       , 16.81      ],
+       [ 1.        ,  4.125     , 17.015625  ],
+       [ 1.        ,  4.15      , 17.2225    ],
+       [ 1.        ,  4.175     , 17.430625  ],
+       [ 1.        ,  4.2       , 17.64      ],
+       [ 1.        ,  4.225     , 17.850625  ],
+       [ 1.        ,  4.25      , 18.0625    ],
+       [ 1.        ,  4.275     , 18.275625  ],
+       [ 1.        ,  4.3       , 18.49      ],
+       [ 1.        ,  4.325     , 18.705625  ],
+       [ 1.        ,  4.35      , 18.9225    ],
+       [ 1.        ,  4.375     , 19.140625  ],
+       [ 1.        ,  4.4       , 19.36      ],
+       [ 1.        ,  4.425     , 19.580625  ],
+       [ 1.        ,  4.45      , 19.8025    ],
+       [ 1.        ,  4.475     , 20.025625  ],
+       [ 1.        ,  4.5       , 20.25      ],
+       [ 1.        ,  4.525     , 20.475625  ],
+       [ 1.        ,  4.55      , 20.7025    ],
+       [ 1.        ,  4.575     , 20.930625  ],
+       [ 1.        ,  4.6       , 21.16      ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that there are some orders of magnitude variation across the columns. We can use standard methods in sklearn to scale these features. This is the <em>zero-mean and unit-variance</em> approach.</p>
+<div class="cell docutils container" id="index-2">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">X_scaled</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.        , -1.05831672, -0.94881821],
+       [ 0.        , -1.05430795, -0.94653852],
+       [ 0.        , -1.05029917, -0.94425357],
+       [ 0.        , -1.0462904 , -0.94196335],
+       [ 0.        , -1.04228162, -0.93966786],
+       [ 0.        , -1.03827284, -0.93736709],
+       [ 0.        , -1.03426407, -0.93506105],
+       [ 0.        , -1.03025529, -0.93274975],
+       [ 0.        , -1.02624652, -0.93043317],
+       [ 0.        , -1.02223774, -0.92811132],
+       [ 0.        , -1.01822897, -0.9257842 ],
+       [ 0.        , -1.01422019, -0.92345181],
+       [ 0.        , -1.01021142, -0.92111415],
+       [ 0.        , -1.00620264, -0.91877122],
+       [ 0.        , -1.00219387, -0.91642301],
+       [ 0.        , -0.99818509, -0.91406954],
+       [ 0.        , -0.99417631, -0.91171079],
+       [ 0.        , -0.99016754, -0.90934678],
+       [ 0.        , -0.98615876, -0.90697749],
+       [ 0.        , -0.98214999, -0.90460293],
+       [ 0.        , -0.97814121, -0.9022231 ],
+       [ 0.        , -0.97413244, -0.899838  ],
+       [ 0.        , -0.97012366, -0.89744763],
+       [ 0.        , -0.96611489, -0.89505199],
+       [ 0.        , -0.96210611, -0.89265108],
+       [ 0.        , -0.57726367, -0.63762197],
+       [ 0.        , -0.55721979, -0.62300829],
+       [ 0.        , -0.53717591, -0.60826284],
+       [ 0.        , -0.51713203, -0.59338561],
+       [ 0.        , -0.49708816, -0.57837662],
+       [ 0.        , -0.47704428, -0.56323584],
+       [ 0.        , -0.4570004 , -0.5479633 ],
+       [ 0.        , -0.43695653, -0.53255898],
+       [ 0.        , -0.41691265, -0.51702289],
+       [ 0.        , -0.39686877, -0.50135502],
+       [ 0.        , -0.37682489, -0.48555538],
+       [ 0.        , -0.35678102, -0.46962397],
+       [ 0.        , -0.33673714, -0.45356078],
+       [ 0.        , -0.31669326, -0.43736582],
+       [ 0.        , -0.29664938, -0.42103909],
+       [ 0.        , -0.27660551, -0.40458058],
+       [ 0.        , -0.25656163, -0.3879903 ],
+       [ 0.        , -0.23651775, -0.37126825],
+       [ 0.        , -0.21647387, -0.35441442],
+       [ 0.        , -0.19643   , -0.33742882],
+       [ 0.        , -0.17638612, -0.32031145],
+       [ 0.        , -0.15634224, -0.3030623 ],
+       [ 0.        , -0.13629837, -0.28568138],
+       [ 0.        , -0.11625449, -0.26816868],
+       [ 0.        , -0.09621061, -0.25052421],
+       [ 0.        ,  1.05831672,  0.98818861],
+       [ 0.        ,  1.08236937,  1.01864409],
+       [ 0.        ,  1.10642203,  1.04928933],
+       [ 0.        ,  1.13047468,  1.08012432],
+       [ 0.        ,  1.15452733,  1.11114907],
+       [ 0.        ,  1.17857999,  1.14236357],
+       [ 0.        ,  1.20263264,  1.17376782],
+       [ 0.        ,  1.22668529,  1.20536183],
+       [ 0.        ,  1.25073794,  1.23714559],
+       [ 0.        ,  1.2747906 ,  1.26911911],
+       [ 0.        ,  1.29884325,  1.30128238],
+       [ 0.        ,  1.3228959 ,  1.3336354 ],
+       [ 0.        ,  1.34694855,  1.36617818],
+       [ 0.        ,  1.37100121,  1.39891071],
+       [ 0.        ,  1.39505386,  1.43183299],
+       [ 0.        ,  1.41910651,  1.46494503],
+       [ 0.        ,  1.44315917,  1.49824682],
+       [ 0.        ,  1.46721182,  1.53173837],
+       [ 0.        ,  1.49126447,  1.56541967],
+       [ 0.        ,  1.51531712,  1.59929072],
+       [ 0.        ,  1.53936978,  1.63335153],
+       [ 0.        ,  1.56342243,  1.66760209],
+       [ 0.        ,  1.58747508,  1.70204241],
+       [ 0.        ,  1.61152774,  1.73667248],
+       [ 0.        ,  1.63558039,  1.7714923 ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check that we get what we asked for:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_scaled</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">X_scaled</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-6.315935428978668e-17, array([0., 1., 1.]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also transform to min-max this way, the default here is to scale between 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">minmax</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">minmax</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
+       [0.00000000e+00, 1.48809524e-03, 8.38022383e-04],
+       [0.00000000e+00, 2.97619048e-03, 1.67798239e-03],
+       [0.00000000e+00, 4.46428571e-03, 2.51988002e-03],
+       [0.00000000e+00, 5.95238095e-03, 3.36371528e-03],
+       [0.00000000e+00, 7.44047619e-03, 4.20948816e-03],
+       [0.00000000e+00, 8.92857143e-03, 5.05719866e-03],
+       [0.00000000e+00, 1.04166667e-02, 5.90684679e-03],
+       [0.00000000e+00, 1.19047619e-02, 6.75843254e-03],
+       [0.00000000e+00, 1.33928571e-02, 7.61195592e-03],
+       [0.00000000e+00, 1.48809524e-02, 8.46741691e-03],
+       [0.00000000e+00, 1.63690476e-02, 9.32481554e-03],
+       [0.00000000e+00, 1.78571429e-02, 1.01841518e-02],
+       [0.00000000e+00, 1.93452381e-02, 1.10454257e-02],
+       [0.00000000e+00, 2.08333333e-02, 1.19086372e-02],
+       [0.00000000e+00, 2.23214286e-02, 1.27737863e-02],
+       [0.00000000e+00, 2.38095238e-02, 1.36408730e-02],
+       [0.00000000e+00, 2.52976190e-02, 1.45098974e-02],
+       [0.00000000e+00, 2.67857143e-02, 1.53808594e-02],
+       [0.00000000e+00, 2.82738095e-02, 1.62537590e-02],
+       [0.00000000e+00, 2.97619048e-02, 1.71285962e-02],
+       [0.00000000e+00, 3.12500000e-02, 1.80053711e-02],
+       [0.00000000e+00, 3.27380952e-02, 1.88840836e-02],
+       [0.00000000e+00, 3.42261905e-02, 1.97647337e-02],
+       [0.00000000e+00, 3.57142857e-02, 2.06473214e-02],
+       [0.00000000e+00, 1.78571429e-01, 1.14397321e-01],
+       [0.00000000e+00, 1.86011905e-01, 1.19769384e-01],
+       [0.00000000e+00, 1.93452381e-01, 1.25189887e-01],
+       [0.00000000e+00, 2.00892857e-01, 1.30658831e-01],
+       [0.00000000e+00, 2.08333333e-01, 1.36176215e-01],
+       [0.00000000e+00, 2.15773810e-01, 1.41742040e-01],
+       [0.00000000e+00, 2.23214286e-01, 1.47356306e-01],
+       [0.00000000e+00, 2.30654762e-01, 1.53019012e-01],
+       [0.00000000e+00, 2.38095238e-01, 1.58730159e-01],
+       [0.00000000e+00, 2.45535714e-01, 1.64489746e-01],
+       [0.00000000e+00, 2.52976190e-01, 1.70297774e-01],
+       [0.00000000e+00, 2.60416667e-01, 1.76154243e-01],
+       [0.00000000e+00, 2.67857143e-01, 1.82059152e-01],
+       [0.00000000e+00, 2.75297619e-01, 1.88012502e-01],
+       [0.00000000e+00, 2.82738095e-01, 1.94014292e-01],
+       [0.00000000e+00, 2.90178571e-01, 2.00064523e-01],
+       [0.00000000e+00, 2.97619048e-01, 2.06163194e-01],
+       [0.00000000e+00, 3.05059524e-01, 2.12310307e-01],
+       [0.00000000e+00, 3.12500000e-01, 2.18505859e-01],
+       [0.00000000e+00, 3.19940476e-01, 2.24749853e-01],
+       [0.00000000e+00, 3.27380952e-01, 2.31042287e-01],
+       [0.00000000e+00, 3.34821429e-01, 2.37383161e-01],
+       [0.00000000e+00, 3.42261905e-01, 2.43772476e-01],
+       [0.00000000e+00, 3.49702381e-01, 2.50210232e-01],
+       [0.00000000e+00, 3.57142857e-01, 2.56696429e-01],
+       [0.00000000e+00, 7.85714286e-01, 7.12053571e-01],
+       [0.00000000e+00, 7.94642857e-01, 7.23249163e-01],
+       [0.00000000e+00, 8.03571429e-01, 7.34514509e-01],
+       [0.00000000e+00, 8.12500000e-01, 7.45849609e-01],
+       [0.00000000e+00, 8.21428571e-01, 7.57254464e-01],
+       [0.00000000e+00, 8.30357143e-01, 7.68729074e-01],
+       [0.00000000e+00, 8.39285714e-01, 7.80273438e-01],
+       [0.00000000e+00, 8.48214286e-01, 7.91887556e-01],
+       [0.00000000e+00, 8.57142857e-01, 8.03571429e-01],
+       [0.00000000e+00, 8.66071429e-01, 8.15325056e-01],
+       [0.00000000e+00, 8.75000000e-01, 8.27148438e-01],
+       [0.00000000e+00, 8.83928571e-01, 8.39041574e-01],
+       [0.00000000e+00, 8.92857143e-01, 8.51004464e-01],
+       [0.00000000e+00, 9.01785714e-01, 8.63037109e-01],
+       [0.00000000e+00, 9.10714286e-01, 8.75139509e-01],
+       [0.00000000e+00, 9.19642857e-01, 8.87311663e-01],
+       [0.00000000e+00, 9.28571429e-01, 8.99553571e-01],
+       [0.00000000e+00, 9.37500000e-01, 9.11865234e-01],
+       [0.00000000e+00, 9.46428571e-01, 9.24246652e-01],
+       [0.00000000e+00, 9.55357143e-01, 9.36697824e-01],
+       [0.00000000e+00, 9.64285714e-01, 9.49218750e-01],
+       [0.00000000e+00, 9.73214286e-01, 9.61809431e-01],
+       [0.00000000e+00, 9.82142857e-01, 9.74469866e-01],
+       [0.00000000e+00, 9.91071429e-01, 9.87200056e-01],
+       [0.00000000e+00, 1.00000000e+00, 1.00000000e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are other ways to do the scaling, and sometimes you have to be careful that you don’t do bad things. For example if you have very sparse data, it may not make sense to center it.</p>
+<div class="section" id="pipeline">
+<h3>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h3>
+<p>These steps can be combined in what is called a <code class="docutils literal notranslate"><span class="pre">pipeline</span></code>. The idea is that data goes into the pipe and is transformed in a series of steps, and the results come out the end of the pipe. The code above can be condensed into this concept like this. Here we also perform a linear regression.</p>
+<div class="cell docutils container" id="index-3">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;poly&quot;</span><span class="p">,</span> <span class="n">poly</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;scale&quot;</span><span class="p">,</span> <span class="n">scaler</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;linregress&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">)])</span>
+
+<span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;poly&#x27;, PolynomialFeatures(degree=4)),
+                (&#x27;scale&#x27;, StandardScaler()),
+                (&#x27;linregress&#x27;, LinearRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[(&#x27;poly&#x27;, PolynomialFeatures(degree=4)),
+                (&#x27;scale&#x27;, StandardScaler()),
+                (&#x27;linregress&#x27;, LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">PolynomialFeatures</label><div class="sk-toggleable__content"><pre>PolynomialFeatures(degree=4)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
+</div>
+<p>Here, we can use visualization to see how well the fit works with this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">dfit</span><span class="p">,</span> <span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dfit</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/intermediate-sklearn_18_0.png" src="../_images/intermediate-sklearn_18_0.png" />
+</div>
+</div>
+<p>The model sort of gets the right idea, but you can see there are issues with it. The local maximum near 3.7 is not real, and the increase in energy past d=4.5 is also not physically correct. We can work with different polynomial orders to see if that is fixable. The polynomial order is considered a <em>hyperparameter</em> here.</p>
+</div>
+</div>
+<div class="section" id="k-fold-validation-cross-validation">
+<h2>k-fold validation / cross-validation<a class="headerlink" href="#k-fold-validation-cross-validation" title="Permalink to this headline">¶</a></h2>
+<p id="index-4"><a class="reference external" href="https://scikit-learn.org/stable/modules/cross_validation.html">https://scikit-learn.org/stable/modules/cross_validation.html</a></p>
+<p>We have 75 data points, and the best thing to do in training would be to split the data into train and test sets. Last time we saw a way to that in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>. The problem with doing it once is that the results may depend on the specific set of data, and it would be nice to see several trials to make sure it doesn’t. You can code this yourself, but here is a better, more formalized way to do it. The idea is called <code class="docutils literal notranslate"><span class="pre">K-fold</span></code> validation, where you split the data into <code class="docutils literal notranslate"><span class="pre">k</span></code> folds that are splits into training and testing data. Then, we fit on k-1 of the folds, and test on the one left out. We do that for all the combinations of folds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">Xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">train</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xfit</span><span class="p">,</span> <span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xfit</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">test</span><span class="p">]),</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">train</span><span class="p">]),</span> <span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">test</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9987178217314685 -0.19477887731882548
+0.9978222474489719 0.830479457317229
+0.9960805625125981 0.8746369801019818
+0.9977170214426697 0.9454540341763907
+0.9968333195835338 -354.96692697901943
+</pre></div>
+</div>
+<img alt="../_images/intermediate-sklearn_22_1.png" src="../_images/intermediate-sklearn_22_1.png" />
+</div>
+</div>
+<p>You can see here that the results depend on the specific data set that is chosen. In every case, the score of the train data is ok, but for some models the test data is not as good. This is commonly observed, and it indicates over-fitting in the train data, and poor generalization in the test data.</p>
+<p>A common metric for judging the fit is called the cross-validation score. This is obtained by averaging the score across all the folds. We would like this score to be a minimum for our model.</p>
+<div class="cell docutils container" id="index-5">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> (+/- </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.94778877e-01  8.30479457e-01  8.74636980e-01  9.45454034e-01
+ -3.54966927e+02]
+Accuracy: -70.50 (+/- 284.47)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hyperparameter-optimization">
+<h2>Hyperparameter optimization<a class="headerlink" href="#hyperparameter-optimization" title="Permalink to this headline">¶</a></h2>
+<p>The next goal we have is to figure out what the best polynomial to use might be. We will leverage <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> again to do this search for us. First, we get a list of parameters that we can change in our <code class="docutils literal notranslate"><span class="pre">pipe</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;memory&#39;, &#39;steps&#39;, &#39;verbose&#39;, &#39;poly&#39;, &#39;scale&#39;, &#39;linregress&#39;, &#39;poly__degree&#39;, &#39;poly__include_bias&#39;, &#39;poly__interaction_only&#39;, &#39;poly__order&#39;, &#39;scale__copy&#39;, &#39;scale__with_mean&#39;, &#39;scale__with_std&#39;, &#39;linregress__copy_X&#39;, &#39;linregress__fit_intercept&#39;, &#39;linregress__n_jobs&#39;, &#39;linregress__positive&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want to vary the <code class="docutils literal notranslate"><span class="pre">poly_degree</span></code> parameter to find the one with the best CV score. We make a list of integer values this argument can take.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdegree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;poly__degree&quot;</span><span class="p">:</span> <span class="n">pdegree</span><span class="p">}]</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">train</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">train</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;poly__degree&#39;: 11}
+</pre></div>
+</div>
+</div>
+</div>
+<p>That tells us an 11th order polynomial is best here. We get a lot of data from this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.00172687, 0.00125117, 0.00131884, 0.00135489, 0.00138068,
+        0.00155125, 0.00139441, 0.00128665, 0.00130043, 0.00131502,
+        0.00131269]),
+ &#39;std_fit_time&#39;: array([2.74351440e-04, 1.63607269e-05, 6.20728803e-05, 7.77171430e-06,
+        1.48065424e-05, 2.68911579e-04, 7.84900034e-05, 1.25948211e-05,
+        1.32613892e-05, 2.22865138e-05, 2.30709370e-05]),
+ &#39;mean_score_time&#39;: array([0.00071769, 0.0005959 , 0.000633  , 0.00063949, 0.00064807,
+        0.00066862, 0.00062966, 0.00062141, 0.0006247 , 0.00061874,
+        0.00061946]),
+ &#39;std_score_time&#39;: array([9.64076296e-05, 1.29972899e-05, 1.54527614e-05, 1.06072423e-05,
+        2.03991583e-05, 3.61147410e-05, 2.90228964e-05, 2.22681421e-05,
+        1.90128316e-05, 6.81627001e-06, 6.74585557e-06]),
+ &#39;param_poly__degree&#39;: masked_array(data=[4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              mask=[False, False, False, False, False, False, False, False,
+                    False, False, False],
+        fill_value=&#39;?&#39;,
+             dtype=object),
+ &#39;params&#39;: [{&#39;poly__degree&#39;: 4},
+  {&#39;poly__degree&#39;: 5},
+  {&#39;poly__degree&#39;: 6},
+  {&#39;poly__degree&#39;: 7},
+  {&#39;poly__degree&#39;: 8},
+  {&#39;poly__degree&#39;: 9},
+  {&#39;poly__degree&#39;: 10},
+  {&#39;poly__degree&#39;: 11},
+  {&#39;poly__degree&#39;: 12},
+  {&#39;poly__degree&#39;: 13},
+  {&#39;poly__degree&#39;: 14}],
+ &#39;split0_test_score&#39;: array([-0.10465458,  0.91296266,  0.99200176,  0.99994327,  0.99999621,
+         0.99999971,  0.99999999,  1.        ,  1.        ,  1.        ,
+         1.        ]),
+ &#39;split1_test_score&#39;: array([0.07879496, 0.9710895 , 0.99886022, 0.99999785, 0.9999998 ,
+        0.99999999, 1.        , 1.        , 1.        , 1.        ,
+        1.        ]),
+ &#39;split2_test_score&#39;: array([0.63751492, 0.96502098, 0.99514639, 0.99999484, 0.99999782,
+        0.99999976, 1.        , 1.        , 1.        , 1.        ,
+        1.        ]),
+ &#39;split3_test_score&#39;: array([0.94674591, 0.9908384 , 0.99920836, 0.99998626, 0.99999984,
+        0.99999994, 1.        , 1.        , 1.        , 1.        ,
+        1.        ]),
+ &#39;split4_test_score&#39;: array([-2.64962933e+03, -1.62101064e+03, -1.26483453e+03, -4.22085130e+02,
+        -1.08058496e+02, -3.69036284e+01, -5.39388383e+00, -3.36957842e-02,
+        -1.78287663e+01, -3.81729812e+00, -6.97519609e+01]),
+ &#39;mean_test_score&#39;: array([-5.29614185e+02, -3.23434146e+02, -2.52169863e+02, -8.36170415e+01,
+        -2.08117004e+01, -6.58072580e+00, -2.78776768e-01,  7.93260843e-01,
+        -2.76575326e+00,  3.65403765e-02, -1.31503922e+01]),
+ &#39;std_test_score&#39;: array([1.06000764e+03, 6.48788248e+02, 5.06332334e+02, 1.69234044e+02,
+        4.36233976e+01, 1.51614513e+01, 2.55755353e+00, 4.13478314e-01,
+        7.53150651e+00, 1.92691925e+00, 2.83007843e+01]),
+ &#39;rank_test_score&#39;: array([11, 10,  9,  8,  7,  5,  3,  1,  4,  2,  6], dtype=int32)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The order 11 is the one that minimizes the average test score <em>and</em> std, and is the best compromise on these.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">pdegree</span><span class="p">,</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s2">&quot;mean_test_score&quot;</span><span class="p">],</span>
+    <span class="n">pdegree</span><span class="p">,</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s2">&quot;std_test_score&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Polynomial order&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;CV score&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/intermediate-sklearn_33_0.png" src="../_images/intermediate-sklearn_33_0.png" />
+</div>
+</div>
+<p>We can also see here that this is a good compromise. Note, however, we still cannot reliably extrapolate with this model because it is still just a polynomial model, and it does not contain any physics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xfit</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xfit</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;fit&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/intermediate-sklearn_35_0.png" src="../_images/intermediate-sklearn_35_0.png" />
+</div>
+</div>
+<p><strong>Exercises</strong> Read more about these sklearn functions. How would you plot the fit for each polynomial degree?</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>We illustrated how to leverage <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to do a single hyperparameter optimization here, the polynomial order. Typical machine learning methods have many hyperparameters. We could add new ones here if you include regularization, e.g Lasso, or Ridge would add one more hyperparameter, and Elastic net would add two. Neural networks have hyperparameters that include how many hidden layers, how many neurons per layer, and which activation functions to use. As the number of parameters grow, it is increasingly important to have automated methods for exploring and optimizing them, as well as principled methods for deciding which models are better.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./06-intermediate-sklearn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../05-linear-regression/linear-regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction to data-driven model development</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../07-nonlinear-sklearn/nonlinear-sklearn.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Nonlinear models in sklearn</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By John Kitchin<br/>
+    
+        &copy; Copyright 2023.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

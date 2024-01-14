@@ -1,0 +1,1234 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to data files &#8212; Data science and machine learning in science and engineering</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jkitchin/dsmles");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Pandas" href="../02-pandas-intro/pandas-intro.html" />
+    <link rel="prev" title="Data science and machine learning in engineering and science" href="../00-introduction/introduction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data science and machine learning in science and engineering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus for  06-642 Data Science and Machine Learning in Chemical Engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-introduction/introduction.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to data files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02-pandas-intro/pandas-intro.html">
+   Introduction to Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03-intermediate-pandas/intermediate-pandas.html">
+   Intermediate Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04-pandas-database/pandas-database.html">
+   Using Pandas DataFrames as a small database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05-linear-regression/linear-regression.html">
+   Introduction to data-driven model development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06-intermediate-sklearn/intermediate-sklearn.html">
+   Intermediate scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07-nonlinear-sklearn/nonlinear-sklearn.html">
+   Nonlinear models in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08-random-forests/random-forests.html">
+   Decision Trees and Random Forests Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09-custom-estimators/custom-estimators.html">
+   Building custom estimators in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary.html">
+   Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/01-numpy/numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jkitchin/s24-06642"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jkitchin/s24-06642/issues/new?title=Issue%20on%20page%20%2F01-numpy/numpy.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jkitchin/s24-06642/main?urlpath=lab/tree/dsmles/01-numpy/numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://jupyterhub-dev.cheme.cmu.edu/hub/user-redirect/git-pull?repo=https://github.com/jkitchin/s24-06642&urlpath=lab/tree/s24-06642/dsmles/01-numpy/numpy.ipynb&branch=main"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/jkitchin/s24-06642/blob/main/dsmles/01-numpy/numpy.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-data-from-a-text-file">
+   Loading data from a text file
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-loading-into-numpy">
+     Simple loading into numpy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-visualization-of-the-data">
+     Simple visualization of the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary">
+     Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-formats">
+   Data formats
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-delimited-text-files">
+     Simple delimited text files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-complex-delimited-files">
+     More complex delimited files
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Summary
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#json-data">
+     json data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#there-are-many-more-data-formats">
+     There are many more data formats
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to data files</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-data-from-a-text-file">
+   Loading data from a text file
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-loading-into-numpy">
+     Simple loading into numpy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-visualization-of-the-data">
+     Simple visualization of the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary">
+     Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-formats">
+   Data formats
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-delimited-text-files">
+     Simple delimited text files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-complex-delimited-files">
+     More complex delimited files
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Summary
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#json-data">
+     json data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#there-are-many-more-data-formats">
+     There are many more data formats
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Summary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-data-files">
+<h1>Introduction to data files<a class="headerlink" href="#introduction-to-data-files" title="Permalink to this headline">¶</a></h1>
+<p>Today we are going to jump right into loading data from files into numpy arrays. Once we have the arrays, then we will then start learning how to use them.</p>
+<div class="section" id="loading-data-from-a-text-file">
+<h2>Loading data from a text file<a class="headerlink" href="#loading-data-from-a-text-file" title="Permalink to this headline">¶</a></h2>
+<p>Usually, data will be in a file, and we need to read it in. There are <em>many</em> data formats to get familiar with, and <em>many</em> ways to read them in. Let’s start by looking at data from a Raman spectrometer.</p>
+<p>In this directory there is a file called <span class="xref myst">raman.txt</span>. The file name suggests it is Raman data, but only because of its name. The extension <em>suggests</em> this is text data, but does not tell us the format.</p>
+<p><em>You cannot in general rely on the extension to tell you what format a file is in. That is an advertisement, and only a convention that is used. You can rename a file and its extension at any time and not change the data.</em></p>
+<p>It is not obvious what is in the file. Unless you made the file, or someone has told you what is in it, the only thing you can do is inspect the file manually. Let’s look at the number of lines and the first 10 lines here.</p>
+<p>We do that by opening the file, reading the lines and then closing the file. We print the number of lines and the first 10 here. The first ten lines are a list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.txt&quot;</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="si">}</span><span class="s2"> lines in the file&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7620 lines in the file
+[&#39;500\t294.37869\n&#39;, &#39;500.39374\t288.922\n&#39;, &#39;500.78751\t286.06622\n&#39;, &#39;501.18124\t275.22284\n&#39;, &#39;501.57501\t275.11938\n&#39;, &#39;501.96875\t287.81372\n&#39;, &#39;502.36252\t299.50803\n&#39;, &#39;502.75626\t285.56567\n&#39;, &#39;503.15002\t292.69519\n&#39;, &#39;503.54376\t295.33951\n&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You might notice the “\t” and “\n” characters. The first is a tab, and the second is a new line (the new line is what defines a line, each line ends with this character). This looks like a <em>tab-delimited</em> text file, with two columns where the numbers are separated by tabs. Unfortunately, there is no information about <em>what</em> the columns are. You have to know from some other context. This file is from a Raman spectrometer, and the first column is the wavenumber, and the second column is the intensity.</p>
+<p>It is important that you remember to close the file. If you are reading lots of files, you can run into operating system errors if you open too many open files. Python is at your service with a <em>context manager</em>. This approach will <em>automatically</em> close the file when it goes of scope.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># f is only open and available inside this body</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inside: </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">closed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outside: </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">closed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inside: False
+Outside: True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="simple-loading-into-numpy">
+<h3>Simple loading into numpy<a class="headerlink" href="#simple-loading-into-numpy" title="Permalink to this headline">¶</a></h3>
+<p>There is an easy way for us to read this file so we can get the data into Python for analysis, via <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code>. Let’s start with the simplest method. We simply use the filename as the only argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;raman.txt&quot;</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 500.      ,  294.37869 ],
+       [ 500.39374 ,  288.922   ],
+       [ 500.78751 ,  286.06622 ],
+       ...,
+       [3499.2124  ,   87.969734],
+       [3499.6062  ,   83.638931],
+       [3500.      ,   84.009064]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the shape here, which confirms that we have read the number of lines, and that there are two columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7620, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is often helpful to separate this array into variables. The first column is the wavenumber and the second column is the intensity. We use indexing to extract these into variables. This is a 2D array, and we index using a notation of <code class="docutils literal notranslate"><span class="pre">[row,</span> <span class="pre">col]</span></code> where <code class="docutils literal notranslate"><span class="pre">row</span></code> indicates which row(s) we want, and <code class="docutils literal notranslate"><span class="pre">col</span></code> indicates which column(s) we want. If you use a <code class="docutils literal notranslate"><span class="pre">:</span></code> it means all of them. Indexing can be very complex (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/arrays.indexing.html">https://docs.scipy.org/doc/numpy/reference/arrays.indexing.html</a>), and we will return to it many times as we do more and more sophisticated things.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wavenumber</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">intensity</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="p">(</span><span class="n">wavenumber</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">intensity</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((7620,), (7620,))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, these variables are 1D arrays.</p>
+<p>Alternatively, you can <em>unpack</em> an array. When you iterate over an array, you iterate over its rows. If we transpose this data, we will change it from two columns with a lot of rows into two rows with a lot of columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wavenumber</span><span class="p">,</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span>
+<span class="p">(</span><span class="n">wavenumber</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">intensity</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((7620,), (7620,))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are some examples of indexing these arrays:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first and last element</span>
+<span class="p">(</span><span class="n">wavenumber</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">wavenumber</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(500.0, 3500.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first five and last 5 elements</span>
+<span class="p">(</span><span class="n">intensity</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">intensity</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([294.37869, 288.922  , 286.06622, 275.22284, 275.11938]),
+ array([86.151878, 85.178947, 87.969734, 83.638931, 84.009064]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>You might be tempted to get the last five elements like this, but it is wrong. Remember in indexing the last element in the slice is not included. Since you specify -1 in the slice it means up to <em>but not including</em> the last element. In contrast, <code class="docutils literal notranslate"><span class="pre">[-5:]</span></code> means from the fifth to last element to the end, <em>including the end</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intensity</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([86.151878, 85.178947, 87.969734, 83.638931])
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are even fancier ways to slice this, e.g. to get every other point or every nth point, or even a set of selected points. We will see these later.</p>
+<p>That is a lot of data. How do we see what is in it? Visualization.</p>
+</div>
+<div class="section" id="simple-visualization-of-the-data">
+<h3>Simple visualization of the data<a class="headerlink" href="#simple-visualization-of-the-data" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://matplotlib.org/">matplotlib</a> is the primary plotting tool we will use. There are a few others that are popular, especially <a class="reference external" href="https://seaborn.pydata.org/">seaborn</a>. It is good advice that when you want to make a plot, a good way to do it is find an example plot like it and see if you can adapt that code to your data.</p>
+<ul class="simple">
+<li><p><strong>matplotlib sample plots:</strong> <a class="reference external" href="https://matplotlib.org/tutorials/introductory/sample_plots.html">https://matplotlib.org/tutorials/introductory/sample_plots.html</a></p></li>
+<li><p><strong>matplotlib gallery:</strong> <a class="reference external" href="https://matplotlib.org/gallery/index.html">https://matplotlib.org/gallery/index.html</a></p></li>
+<li><p><strong>seaborn gallery:</strong> <a class="reference external" href="https://seaborn.pydata.org/examples/index.html">https://seaborn.pydata.org/examples/index.html</a></p></li>
+</ul>
+<p>There are many other plotting libraries, e.g. <a class="reference external" href="https://plot.ly/">plotly</a> and <a class="reference external" href="https://altair-viz.github.io/gallery/index.html#gallery-category-interactive-charts">altair</a> that are more suitable for web graphics. These have much more complex APIs and it takes a long time to get familiar with them.</p>
+<p>We will start simple. We start by importing matplotlib.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can make a plot as simple as this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">,</span> <span class="n">intensity</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Intensity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_26_0.png" src="../_images/numpy_26_0.png" />
+</div>
+</div>
+<p>Now, we have a graphical representation of this data set. You can interact with it in the notebook. You can see the coordinates, and zoom in on regions. Suppose we want to make sure we <em>reproducibly</em> zoom in to a region though. That requires us to script it so that you have a written record of what you did.</p>
+<p>Let’s make a plot of a subset of the spectrum, say the points where the wavenumber is at least 1000, and less than 1500. To do that, we need a way to select the data subset. We can use indexing for this purpose. We define a <em>boolean</em> array where it is True for the points we want, and False for the ones we do not want. The comparison operators will do this, and the logical &amp; operator combines the two conditions. Note these are all elementwise operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># indices of points where 1000 &gt;= wavenumber &gt; 1500</span>
+<span class="c1"># True means it meets the criteria, False means it does not</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavenumber</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wavenumber</span> <span class="o">&lt;</span> <span class="mi">1500</span><span class="p">)</span>
+<span class="n">ind</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([False, False, False, ..., False, False, False])
+</pre></div>
+</div>
+</div>
+</div>
+<p>These two arrays have the same shape, that is we evaluated the condition on every single point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">wavenumber</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((7620,), (7620,))
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many points did we get? We can find out by counting the number of True values. In Python, True=1, and False=0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span> <span class="o">+</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, we get the number of True values just by summing them here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1270
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also plot the values like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">,</span> <span class="n">ind</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;ind&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_36_0.png" src="../_images/numpy_36_0.png" />
+</div>
+</div>
+<p>These are all ways to check that we have the indices we want. Now we use that array to select the <em>portion</em> of the data we want. When we use the Boolean array to index with, the result is a shorter array containing only values where the Boolean array was True.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wavenumber</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1270,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have to index <em>both</em> the x and y data to make this plot, because we can only plot arrays with the matching dimensions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">intensity</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Intensity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_40_0.png" src="../_images/numpy_40_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p>There was a lot of explanation above, so the brevity of this code may have been lost. Here is what we need to read the data and plot it (assuming you have already done the imports).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;raman.txt&quot;</span><span class="p">)</span>
+
+<span class="n">wavenumber</span><span class="p">,</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># the transpose has data in rows for unpacking</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavenumber</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wavenumber</span> <span class="o">&lt;</span> <span class="mi">1500</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">intensity</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Intensity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_43_0.png" src="../_images/numpy_43_0.png" />
+</div>
+</div>
+<p>In this simple example we have learned how to:</p>
+<ol class="simple">
+<li><p>Retrieve data from a url into a local file</p></li>
+<li><p>Read a local file of tab-delimited data into numpy arrays</p></li>
+<li><p>Visualize the arrays</p></li>
+<li><p>Select a subset of the arrays and visualize the subset.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="data-formats">
+<h2>Data formats<a class="headerlink" href="#data-formats" title="Permalink to this headline">¶</a></h2>
+<p>The data in the previous example was loaded from a tab-delimited text file. There are many other kinds of files you might have to read from.</p>
+<div class="section" id="simple-delimited-text-files">
+<h3>Simple delimited text files<a class="headerlink" href="#simple-delimited-text-files" title="Permalink to this headline">¶</a></h3>
+<p>In a delimited text file, the data is represented in each line, with the values separated by a <em>delimiter</em>. In the tab-delimited data, tab characters are the separators. The other common delimiter is a comma, and these files are often called comma-separated value (CSV) files. For now, we limit the discussion to files containing numbers that are separated by commas. <span class="xref myst">raman.csv</span> is a CSV file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7620
+[&#39;5.000000000000000000e+02,2.943786900000000060e+02\n&#39;, &#39;5.003937399999999798e+02,2.889220000000000255e+02\n&#39;, &#39;5.007875099999999975e+02,2.860662199999999871e+02\n&#39;, &#39;5.011812400000000025e+02,2.752228400000000192e+02\n&#39;, &#39;5.015750100000000202e+02,2.751193799999999783e+02\n&#39;, &#39;5.019687500000000000e+02,2.878137199999999893e+02\n&#39;, &#39;5.023625200000000177e+02,2.995080300000000193e+02\n&#39;, &#39;5.027562599999999975e+02,2.855656700000000114e+02\n&#39;, &#39;5.031500199999999836e+02,2.926951900000000251e+02\n&#39;, &#39;5.035437600000000202e+02,2.953395100000000184e+02\n&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see the numbers in each line are now separated by commas. <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code> works for this file too, but we have to specify that the delimiter is a comma. See the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html">documentation</a> on <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code> for more options.</p>
+<p>Note: CSV is surprisingly complex, and there is a <a class="reference external" href="https://docs.python.org/3/library/csv.html">dedicated library</a> for parsing it. We will stick to simple numerical csv files, which are easy to load in numpy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;raman.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 500.      ,  294.37869 ],
+       [ 500.39374 ,  288.922   ],
+       [ 500.78751 ,  286.06622 ],
+       ...,
+       [3499.2124  ,   87.969734],
+       [3499.6062  ,   83.638931],
+       [3500.      ,   84.009064]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s do one more thing that is convenient here, which is we directly <em>unpack</em> the columns into variable names:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wave</span><span class="p">,</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;raman.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wave</span><span class="p">,</span> <span class="n">intensity</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;intensity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_53_0.png" src="../_images/numpy_53_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="more-complex-delimited-files">
+<h3>More complex delimited files<a class="headerlink" href="#more-complex-delimited-files" title="Permalink to this headline">¶</a></h3>
+<p>This data is located at <a class="reference external" href="https://www.itl.nist.gov/div898/handbook/datasets/MODEL-4_4_4.DAT">https://www.itl.nist.gov/div898/handbook/datasets/MODEL-4_4_4.DAT</a>. There is a copy of the file in this directory <span class="xref myst">here</span>.</p>
+<p>If we examine the first few lines of this file, it appears that the first two lines are considered headers that tell you what is in the file. We need to skip these when reading the data. Also, each line appears as a string, with the values lining up in columns. This is sometimes called a fixed delimiter file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;p-t.dat&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Run          Ambient                            Fitted
+Order  Day  Temperature  Temperature  Pressure    Value    Residual
+ 1      1      23.820      54.749      225.066   222.920     2.146
+ 2      1      24.120      23.323      100.331    99.411     0.920
+ 3      1      23.434      58.775      230.863   238.744    -7.881
+</pre></div>
+</div>
+</div>
+</div>
+<p>I did something kind of fancy there. First, we read the lines and slice out the first 5 of them. That gives us a list of 5 lines. Then, I rejoin them so we get a single string, and then I printed it. That is to avoid getting two newlines (one from the line, and one from the print). We can tell print not to add a new line like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;p-t.dat&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Run          Ambient                            Fitted
+Order  Day  Temperature  Temperature  Pressure    Value    Residual
+ 1      1      23.820      54.749      225.066   222.920     2.146
+ 2      1      24.120      23.323      100.331    99.411     0.920
+ 3      1      23.434      58.775      230.863   238.744    -7.881
+</pre></div>
+</div>
+</div>
+</div>
+<p>Either way, you can see there are two non-data lines here. We can still load this file with <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code> we just tell it to skip the first two lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;p-t.dat&quot;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  1.   ,   1.   ,  23.82 ,  54.749, 225.066, 222.92 ,   2.146],
+       [  2.   ,   1.   ,  24.12 ,  23.323, 100.331,  99.411,   0.92 ],
+       [  3.   ,   1.   ,  23.434,  58.775, 230.863, 238.744,  -7.881],
+       [  4.   ,   1.   ,  23.993,  25.854, 106.16 , 109.359,  -3.199],
+       [  5.   ,   1.   ,  23.375,  68.297, 277.502, 276.165,   1.336],
+       [  6.   ,   1.   ,  23.233,  37.481, 148.314, 155.056,  -6.741],
+       [  7.   ,   1.   ,  24.162,  49.542, 197.562, 202.456,  -4.895],
+       [  8.   ,   1.   ,  23.667,  34.101, 138.537, 141.77 ,  -3.232],
+       [  9.   ,   1.   ,  24.056,  33.901, 137.969, 140.983,  -3.014],
+       [ 10.   ,   1.   ,  22.786,  29.242, 117.41 , 122.674,  -5.263],
+       [ 11.   ,   2.   ,  23.785,  39.506, 164.442, 163.013,   1.429],
+       [ 12.   ,   2.   ,  22.987,  43.004, 181.044, 176.759,   4.285],
+       [ 13.   ,   2.   ,  23.799,  53.226, 222.179, 216.933,   5.246],
+       [ 14.   ,   2.   ,  23.661,  54.467, 227.01 , 221.813,   5.198],
+       [ 15.   ,   2.   ,  23.852,  57.549, 232.496, 233.925,  -1.429],
+       [ 16.   ,   2.   ,  23.379,  61.204, 253.557, 248.288,   5.269],
+       [ 17.   ,   2.   ,  24.146,  31.489, 139.894, 131.506,   8.388],
+       [ 18.   ,   2.   ,  24.187,  68.476, 273.931, 276.871,  -2.94 ],
+       [ 19.   ,   2.   ,  24.159,  51.144, 207.969, 208.753,  -0.784],
+       [ 20.   ,   2.   ,  23.803,  68.774, 280.205, 278.04 ,   2.165],
+       [ 21.   ,   3.   ,  24.381,  55.35 , 227.06 , 225.282,   1.779],
+       [ 22.   ,   3.   ,  24.027,  44.692, 180.605, 183.396,  -2.791],
+       [ 23.   ,   3.   ,  24.342,  50.995, 206.229, 208.167,  -1.938],
+       [ 24.   ,   3.   ,  23.67 ,  21.602,  91.464,  92.649,  -1.186],
+       [ 25.   ,   3.   ,  24.246,  54.673, 223.869, 222.622,   1.247],
+       [ 26.   ,   3.   ,  25.082,  41.449, 172.91 , 170.651,   2.259],
+       [ 27.   ,   3.   ,  24.575,  35.451, 152.073, 147.075,   4.998],
+       [ 28.   ,   3.   ,  23.803,  42.989, 169.427, 176.703,  -7.276],
+       [ 29.   ,   3.   ,  24.66 ,  48.599, 192.561, 198.748,  -6.188],
+       [ 30.   ,   3.   ,  24.097,  21.448,  94.448,  92.042,   2.406],
+       [ 31.   ,   4.   ,  22.816,  56.982, 222.794, 231.697,  -8.902],
+       [ 32.   ,   4.   ,  24.167,  47.901, 199.003, 196.008,   2.996],
+       [ 33.   ,   4.   ,  22.712,  40.285, 168.668, 166.077,   2.592],
+       [ 34.   ,   4.   ,  23.611,  25.609, 109.387, 108.397,   0.99 ],
+       [ 35.   ,   4.   ,  23.354,  22.971,  98.445,  98.029,   0.416],
+       [ 36.   ,   4.   ,  23.669,  25.838, 110.987, 109.295,   1.692],
+       [ 37.   ,   4.   ,  23.965,  49.127, 202.662, 200.826,   1.835],
+       [ 38.   ,   4.   ,  22.917,  54.936, 224.773, 223.653,   1.12 ],
+       [ 39.   ,   4.   ,  23.546,  50.917, 216.058, 207.859,   8.199],
+       [ 40.   ,   4.   ,  24.45 ,  41.976, 171.469, 172.72 ,  -1.251]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>You may note, however, that the first two columns are floats, and not integers. We can fix that (if it matters), at the cost of some complexity. We specify the format of each column in the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument. This leads to a structured data array (<a class="reference external" href="https://docs.scipy.org/doc/numpy/user/basics.rec.html">https://docs.scipy.org/doc/numpy/user/basics.rec.html</a>).</p>
+<p>The dtype formats are documented at <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html#arrays-dtypes-constructing">https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html#arrays-dtypes-constructing</a>. The ones we use here are for 32-bit integers and floats.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span>
+    <span class="s2">&quot;p-t.dat&quot;</span><span class="p">,</span>
+    <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">&quot;run order&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;day&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ambient temperature&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pressure&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;fitted value&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;residual&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;formats&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;i4&quot;</span><span class="p">,</span> <span class="s2">&quot;i4&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">,</span> <span class="s2">&quot;f4&quot;</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([( 1, 1, 23.82 , 54.749, 225.066, 222.92 ,  2.146),
+       ( 2, 1, 24.12 , 23.323, 100.331,  99.411,  0.92 ),
+       ( 3, 1, 23.434, 58.775, 230.863, 238.744, -7.881),
+       ( 4, 1, 23.993, 25.854, 106.16 , 109.359, -3.199),
+       ( 5, 1, 23.375, 68.297, 277.502, 276.165,  1.336),
+       ( 6, 1, 23.233, 37.481, 148.314, 155.056, -6.741),
+       ( 7, 1, 24.162, 49.542, 197.562, 202.456, -4.895),
+       ( 8, 1, 23.667, 34.101, 138.537, 141.77 , -3.232),
+       ( 9, 1, 24.056, 33.901, 137.969, 140.983, -3.014),
+       (10, 1, 22.786, 29.242, 117.41 , 122.674, -5.263),
+       (11, 2, 23.785, 39.506, 164.442, 163.013,  1.429),
+       (12, 2, 22.987, 43.004, 181.044, 176.759,  4.285),
+       (13, 2, 23.799, 53.226, 222.179, 216.933,  5.246),
+       (14, 2, 23.661, 54.467, 227.01 , 221.813,  5.198),
+       (15, 2, 23.852, 57.549, 232.496, 233.925, -1.429),
+       (16, 2, 23.379, 61.204, 253.557, 248.288,  5.269),
+       (17, 2, 24.146, 31.489, 139.894, 131.506,  8.388),
+       (18, 2, 24.187, 68.476, 273.931, 276.871, -2.94 ),
+       (19, 2, 24.159, 51.144, 207.969, 208.753, -0.784),
+       (20, 2, 23.803, 68.774, 280.205, 278.04 ,  2.165),
+       (21, 3, 24.381, 55.35 , 227.06 , 225.282,  1.779),
+       (22, 3, 24.027, 44.692, 180.605, 183.396, -2.791),
+       (23, 3, 24.342, 50.995, 206.229, 208.167, -1.938),
+       (24, 3, 23.67 , 21.602,  91.464,  92.649, -1.186),
+       (25, 3, 24.246, 54.673, 223.869, 222.622,  1.247),
+       (26, 3, 25.082, 41.449, 172.91 , 170.651,  2.259),
+       (27, 3, 24.575, 35.451, 152.073, 147.075,  4.998),
+       (28, 3, 23.803, 42.989, 169.427, 176.703, -7.276),
+       (29, 3, 24.66 , 48.599, 192.561, 198.748, -6.188),
+       (30, 3, 24.097, 21.448,  94.448,  92.042,  2.406),
+       (31, 4, 22.816, 56.982, 222.794, 231.697, -8.902),
+       (32, 4, 24.167, 47.901, 199.003, 196.008,  2.996),
+       (33, 4, 22.712, 40.285, 168.668, 166.077,  2.592),
+       (34, 4, 23.611, 25.609, 109.387, 108.397,  0.99 ),
+       (35, 4, 23.354, 22.971,  98.445,  98.029,  0.416),
+       (36, 4, 23.669, 25.838, 110.987, 109.295,  1.692),
+       (37, 4, 23.965, 49.127, 202.662, 200.826,  1.835),
+       (38, 4, 22.917, 54.936, 224.773, 223.653,  1.12 ),
+       (39, 4, 23.546, 50.917, 216.058, 207.859,  8.199),
+       (40, 4, 24.45 , 41.976, 171.469, 172.72 , -1.251)],
+      dtype=[(&#39;run order&#39;, &#39;&lt;i4&#39;), (&#39;day&#39;, &#39;&lt;i4&#39;), (&#39;ambient temperature&#39;, &#39;&lt;f4&#39;), (&#39;temperature&#39;, &#39;&lt;f4&#39;), (&#39;pressure&#39;, &#39;&lt;f4&#39;), (&#39;fitted value&#39;, &#39;&lt;f4&#39;), (&#39;residual&#39;, &#39;&lt;f4&#39;)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This array should look different to you. First, each row is in (), and the dtype at the end looks different, with names and formats.</p>
+<p>One benefit of this is you can now use human readable names to select the various columns. We will return to this idea later when we learn about Pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span> <span class="s2">&quot;b. &quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperatue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;pressure&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_64_0.png" src="../_images/numpy_64_0.png" />
+</div>
+</div>
+<p>Note that this is not a 2D array, even though it looks like one! It is considered a 1D array of records.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is not possible to slice this array like we did before. Instead we select columns by name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([54.749, 23.323, 58.775, 25.854, 68.297, 37.481, 49.542, 34.101,
+       33.901, 29.242, 39.506, 43.004, 53.226, 54.467, 57.549, 61.204,
+       31.489, 68.476, 51.144, 68.774, 55.35 , 44.692, 50.995, 21.602,
+       54.673, 41.449, 35.451, 42.989, 48.599, 21.448, 56.982, 47.901,
+       40.285, 25.609, 22.971, 25.838, 49.127, 54.936, 50.917, 41.976],
+      dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Summary<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>This data file was a text file, with a <em>header</em> that described some information about the data. The data itself was still delimited, but each column had a different type of data, e.g. in this case integers and floats. Some files may also have string data in columns. As the data gets more heterogeneous, it gets more challenging to read it into variables. In the worst case scenario, you can write a custom data parser, but this is hard work that should usually be avoided if possible.</p>
+</div>
+</div>
+<div class="section" id="json-data">
+<h3>json data<a class="headerlink" href="#json-data" title="Permalink to this headline">¶</a></h3>
+<p>json (javascript object notation) is another convenient data format (<a class="reference external" href="https://www.json.org/json-en.html">https://www.json.org/json-en.html</a>). This data format stores data in a “key=value” format, and when you load it, you get a dictionary of the data. Let’s see the first few characters of this file. Why the first few characters? A json file may be only one line as defined by newlines. <span class="xref myst">Here</span> is the json file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>But you can see there are a lot of characters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>165882
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see the first 50 of the characters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;wavenumber&quot;: [500.0, 500.39374, 500.78751, 501.1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, “wavenumber” is a key, and it has a value (the thing on the other side of the :) that is an array of numbers. Luckily, it is easy to load this in Python with the json library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;raman.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(dict, dict_keys([&#39;wavenumber&#39;, &#39;intensity&#39;]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that this does not read the data into numpy arrays. We have a list for these instead. We can convert them to arrays if we need to.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">([</span><span class="s2">&quot;wavenumber&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;wavenumber&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;intensity&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Intensity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/numpy_82_0.png" src="../_images/numpy_82_0.png" />
+</div>
+</div>
+<p>It is fine to plot with these lists, but if you need to do any array operations or analysis on them, you may need to convert them to arrays first (although many numpy functions work on lists just fine).</p>
+</div>
+<div class="section" id="there-are-many-more-data-formats">
+<h3>There are many more data formats<a class="headerlink" href="#there-are-many-more-data-formats" title="Permalink to this headline">¶</a></h3>
+<p>There are many more formats. For most of these, there are standard libraries for reading them data into an array form that you can use. You should usually search for a library that can read your data first, rather than try to implement your own parser.</p>
+<ul class="simple">
+<li><p><strong>netcdf:</strong> <a class="reference external" href="https://unidata.github.io/netcdf4-python/netCDF4/index.html">https://unidata.github.io/netcdf4-python/netCDF4/index.html</a></p></li>
+<li><p><strong>hdf5:</strong> <a class="reference external" href="https://www.h5py.org/">https://www.h5py.org/</a></p></li>
+<li><p><strong>xml:</strong> <a class="reference external" href="https://docs.python.org/3/library/xml.html">https://docs.python.org/3/library/xml.html</a></p></li>
+<li><p><strong>matlab .mat files:</strong> <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.loadmat.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.loadmat.html</a></p></li>
+<li><p><strong>binary data files:</strong> <a class="reference external" href="https://www.devdungeon.com/content/working-binary-data-python">https://www.devdungeon.com/content/working-binary-data-python</a></p></li>
+<li><p><strong>scipy io routines:</strong> <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/io.html">https://docs.scipy.org/doc/scipy/reference/io.html</a></p></li>
+<li><p><strong>molecular simulation files:</strong> <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/io/io.html#module-ase.io">https://wiki.fysik.dtu.dk/ase/ase/io/io.html#module-ase.io</a></p></li>
+<li><p><strong>yaml:</strong> <a class="reference external" href="https://pyyaml.org/wiki/PyYAMLDocumentation">https://pyyaml.org/wiki/PyYAMLDocumentation</a></p></li>
+<li><p><strong>config files:</strong> <a class="reference external" href="https://docs.python.org/3/library/configparser.html">https://docs.python.org/3/library/configparser.html</a></p></li>
+<li><p><strong>Excel:</strong> <a class="reference external" href="https://openpyxl.readthedocs.io/en/stable/index.html">https://openpyxl.readthedocs.io/en/stable/index.html</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Summary<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Today the focus was on orienting ourselves to the main ideas of reading data files. These are:</p>
+<ol class="simple">
+<li><p>What kind of data file is it?</p></li>
+<li><p>Is there a library function that makes it easy to read?</p></li>
+<li><p>How do you get the data into arrays and variables for further analysis.</p></li>
+</ol>
+<p>We also examined how to make simple visualizations of the data.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./01-numpy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../00-introduction/introduction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Data science and machine learning in engineering and science</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../02-pandas-intro/pandas-intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Pandas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By John Kitchin<br/>
+    
+        &copy; Copyright 2023.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

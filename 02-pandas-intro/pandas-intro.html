@@ -1,0 +1,3011 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Pandas &#8212; Data science and machine learning in science and engineering</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "jkitchin/dsmles");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Intermediate Pandas" href="../03-intermediate-pandas/intermediate-pandas.html" />
+    <link rel="prev" title="Introduction to data files" href="../01-numpy/numpy.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data science and machine learning in science and engineering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus for  06-642 Data Science and Machine Learning in Chemical Engineering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00-introduction/introduction.html">
+   Data science and machine learning in engineering and science
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01-numpy/numpy.html">
+   Introduction to data files
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03-intermediate-pandas/intermediate-pandas.html">
+   Intermediate Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04-pandas-database/pandas-database.html">
+   Using Pandas DataFrames as a small database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05-linear-regression/linear-regression.html">
+   Introduction to data-driven model development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06-intermediate-sklearn/intermediate-sklearn.html">
+   Intermediate scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07-nonlinear-sklearn/nonlinear-sklearn.html">
+   Nonlinear models in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08-random-forests/random-forests.html">
+   Decision Trees and Random Forests Examples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09-custom-estimators/custom-estimators.html">
+   Building custom estimators in sklearn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../summary.html">
+   Summary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/02-pandas-intro/pandas-intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jkitchin/s24-06642"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jkitchin/s24-06642/issues/new?title=Issue%20on%20page%20%2F02-pandas-intro/pandas-intro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/jkitchin/s24-06642/main?urlpath=lab/tree/dsmles/02-pandas-intro/pandas-intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        <a class="jupyterhub-button" href="https://jupyterhub-dev.cheme.cmu.edu/hub/user-redirect/git-pull?repo=https://github.com/jkitchin/s24-06642&urlpath=lab/tree/s24-06642/dsmles/02-pandas-intro/pandas-intro.ipynb&branch=main"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/jkitchin/s24-06642/blob/main/dsmles/02-pandas-intro/pandas-intro.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-of-the-numpy-array-way">
+   Review of the numpy array way
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#now-with-pandas">
+   Now, with Pandas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas">
+   Pandas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataframes-and-visualization">
+     Dataframes and visualization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-data-in-pandas">
+     Reading data in Pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#another-real-life-example">
+   Another real-life example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-data">
+     Visualizing the data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-a-column">
+       Plot a column
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-distributions-of-a-column">
+       Plot distributions of a column
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-column-correlations">
+       Plot column correlations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-parts-of-a-pandas-dataframe">
+     Getting parts of a Pandas DataFrame
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operating-on-columns-in-the-dataframe">
+     Operating on columns in the DataFrame
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to Pandas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-of-the-numpy-array-way">
+   Review of the numpy array way
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#now-with-pandas">
+   Now, with Pandas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas">
+   Pandas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataframes-and-visualization">
+     Dataframes and visualization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-data-in-pandas">
+     Reading data in Pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#another-real-life-example">
+   Another real-life example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-data">
+     Visualizing the data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-a-column">
+       Plot a column
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-distributions-of-a-column">
+       Plot distributions of a column
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-column-correlations">
+       Plot column correlations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#getting-parts-of-a-pandas-dataframe">
+     Getting parts of a Pandas DataFrame
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operating-on-columns-in-the-dataframe">
+     Operating on columns in the DataFrame
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-pandas">
+<h1>Introduction to Pandas<a class="headerlink" href="#introduction-to-pandas" title="Permalink to this headline">¶</a></h1>
+<p>Before we jump into Pandas, let us review what we have considered so far.</p>
+<p>First, we learned how to read data from files into numpy arrays. We learned how to use variables to store that data, and to either slice the array into a few variables, or use slices themselves for something. We also learned how to make a <em>record</em> array that enabled us to access columns of the array by a <em>name</em>.</p>
+<p>When we loaded a json file, we got a <em>dictionary</em> data structure, which also allowed us to access data by a <em>name</em>.</p>
+<p>Second, we imported a visualization library, and made plots that used the arrays as arguments.</p>
+<p>For “small” data sets, i.e. not too many columns, this is a perfectly reasonable thing to do. For larger datasets, however, it can be tedious to create a lot of variable names, and it is also hard to remember what is in each column.</p>
+<p>Many tasks are pretty standard, e.g. read a data set, summarize and visualize it. It would be nice if we had a simple way to do this, with few lines of code, since those lines will be the same every time.</p>
+<p>The <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> library was developed to address all these issues. From the website: “<strong>pandas</strong> is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.”</p>
+<div class="section" id="review-of-the-numpy-array-way">
+<span id="index-0"></span><h2>Review of the numpy array way<a class="headerlink" href="#review-of-the-numpy-array-way" title="Permalink to this headline">¶</a></h2>
+<p>Let’s review what we learned already.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;raman.txt&quot;</span><span class="p">)</span>
+
+<span class="n">wavenumber</span><span class="p">,</span> <span class="n">intensity</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># the transpose has data in rows for unpacking</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavenumber</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wavenumber</span> <span class="o">&lt;</span> <span class="mi">1500</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="n">intensity</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Intensity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_4_0.png" src="../_images/pandas-intro_4_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="now-with-pandas">
+<h2>Now, with Pandas<a class="headerlink" href="#now-with-pandas" title="Permalink to this headline">¶</a></h2>
+<p>We will unpack this code shortly. For now, look how short it is to create this plot. Note that we have condensed all the code in the example above basically into three lines of code. That is pretty remarkable, but should give you some pause. We now have to learn how to use such a dense syntax!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;raman.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;wavenumber&quot;</span><span class="p">,</span> <span class="s2">&quot;intensity&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="mi">1500</span><span class="p">)]</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_7_0.png" src="../_images/pandas-intro_7_0.png" />
+</div>
+</div>
+<p>And to summarize.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>intensity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>7620.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>558.388392</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>982.659031</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>77.104279</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>113.666535</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>219.409340</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>552.632848</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>15275.059000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What is the benefit of this dense syntax? Because it is so short, it is faster to type (at least, when you know what to type). That means it is also faster for you to read.</p>
+<p>The downside is that it is like learning a whole new language within Python, and a new mental model for how the data is stored and accessed. You have to decide if it is worthwhile doing that. If you do this a lot, it is probably worthwhile.</p>
+</div>
+<div class="section" id="pandas">
+<h2>Pandas<a class="headerlink" href="#pandas" title="Permalink to this headline">¶</a></h2>
+<p>The main object we will work with is called a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.frame.DataFrame
+</pre></div>
+</div>
+</div>
+</div>
+<p>Jupyter notebooks can show you a fancy rendering of your dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>intensity</th>
+    </tr>
+    <tr>
+      <th>wavenumber</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>500.00000</th>
+      <td>294.378690</td>
+    </tr>
+    <tr>
+      <th>500.39374</th>
+      <td>288.922000</td>
+    </tr>
+    <tr>
+      <th>500.78751</th>
+      <td>286.066220</td>
+    </tr>
+    <tr>
+      <th>501.18124</th>
+      <td>275.222840</td>
+    </tr>
+    <tr>
+      <th>501.57501</th>
+      <td>275.119380</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3498.42500</th>
+      <td>86.151878</td>
+    </tr>
+    <tr>
+      <th>3498.81880</th>
+      <td>85.178947</td>
+    </tr>
+    <tr>
+      <th>3499.21240</th>
+      <td>87.969734</td>
+    </tr>
+    <tr>
+      <th>3499.60620</th>
+      <td>83.638931</td>
+    </tr>
+    <tr>
+      <th>3500.00000</th>
+      <td>84.009064</td>
+    </tr>
+  </tbody>
+</table>
+<p>7620 rows × 1 columns</p>
+</div></div></div>
+</div>
+<p>The dataframe combines a few ideas we used from arrays and dictionaries. First, we can access a column by name. When we do this, we get a <code class="docutils literal notranslate"><span class="pre">Series</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;intensity&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.series.Series
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can extract the values into a numpy array like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;intensity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([294.37869 , 288.922   , 286.06622 , ...,  87.969734,  83.638931,
+        84.009064])
+</pre></div>
+</div>
+</div>
+</div>
+<p>A Series (and DataFrame) are like numpy arrays in some ways, and different in others. Suppose we want to see the first five entries of the intensity. If we want to use <em>integer-based</em> indexing like we have so far, you have to use the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> attribute on the series like this. <code class="docutils literal notranslate"><span class="pre">iloc</span></code> is for integer location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;intensity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>wavenumber
+500.00000    294.37869
+500.39374    288.92200
+500.78751    286.06622
+501.18124    275.22284
+501.57501    275.11938
+Name: intensity, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>What about the wavenumbers? These are called the <em>index</em> of the dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([    500.0, 500.39374, 500.78751, 501.18124, 501.57501, 501.96875,
+       502.36252, 502.75626, 503.15002, 503.54376,
+       ...
+       3496.4563, 3496.8501, 3497.2437, 3497.6375, 3498.0313,  3498.425,
+       3498.8188, 3499.2124, 3499.6062,    3500.0],
+      dtype=&#39;float64&#39;, name=&#39;wavenumber&#39;, length=7620)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can index the index with integers as you can with an array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([500.0, 500.39374, 500.78751, 501.18124, 501.57501], dtype=&#39;float64&#39;, name=&#39;wavenumber&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, you can combine these so that you index a column with a slice of the index like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;intensity&quot;</span><span class="p">][</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>wavenumber
+500.00000    294.37869
+500.39374    288.92200
+500.78751    286.06622
+501.18124    275.22284
+501.57501    275.11938
+Name: intensity, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>In summary, we can think of a dataframe as a hybrid array/dictionary where we have an index which is like the independent variable, and a set of columns that are like dependent variables. You can access the columns like a dictionary.</p>
+<div class="section" id="dataframes-and-visualization">
+<h3>Dataframes and visualization<a class="headerlink" href="#dataframes-and-visualization" title="Permalink to this headline">¶</a></h3>
+<p>Dataframes also provide easy access to <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html">visualization</a>. The simplest method is to just call the plot method on a dataframe. Note this automatically makes the plot with labels and a legend. If there are many columns, you will have a curve for each one of them. We will see that later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_31_0.png" src="../_images/pandas-intro_31_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="reading-data-in-pandas">
+<h3>Reading data in Pandas<a class="headerlink" href="#reading-data-in-pandas" title="Permalink to this headline">¶</a></h3>
+<p>Let’s get back to how we got the data into Pandas. Let’s retrieve the data file we used before with several columns in it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;p-t.dat&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.itl.nist.gov/div898/handbook/datasets/MODEL-4_4_4.DAT&quot;</span>
+
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">fname</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s refresh our memory of what is in this file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>head<span class="w"> </span>p-t.dat
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Run          Ambient                            Fitted
+
+Order  Day  Temperature  Temperature  Pressure    Value    Residual
+
+ 1      1      23.820      54.749      225.066   222.920     2.146
+
+ 2      1      24.120      23.323      100.331    99.411     0.920
+
+ 3      1      23.434      58.775      230.863   238.744    -7.881
+
+ 4      1      23.993      25.854      106.160   109.359    -3.199
+
+ 5      1      23.375      68.297      277.502   276.165     1.336
+
+ 6      1      23.233      37.481      148.314   155.056    -6.741
+
+ 7      1      24.162      49.542      197.562   202.456    -4.895
+
+ 8      1      23.667      34.101      138.537   141.770    -3.232
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html">Pandas.read_csv</a> to read this, similar to how we used <code class="docutils literal notranslate"><span class="pre">numpy.loadtxt</span></code>. It also takes a lot of arguments to fine-tune the output. We use spaces as the delimiter here. <code class="docutils literal notranslate"><span class="pre">'\s+'</span></code> is a <em>regular expression</em> for multiple spaces. We still skip two rows, and we have to manually define the column names. We <em>do not</em> specify an index column here, we get a default one based on integers. Pandas is smart enough to recognize the first two columns are integers, so we do not have to do anything special here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;p-t.dat&quot;</span><span class="p">,</span>
+    <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span>
+    <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Run order&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Day&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ambient Temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Pressure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Fitted Value&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Residual&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Run order</th>
+      <th>Day</th>
+      <th>Ambient Temperature</th>
+      <th>Temperature</th>
+      <th>Pressure</th>
+      <th>Fitted Value</th>
+      <th>Residual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>23.820</td>
+      <td>54.749</td>
+      <td>225.066</td>
+      <td>222.920</td>
+      <td>2.146</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>24.120</td>
+      <td>23.323</td>
+      <td>100.331</td>
+      <td>99.411</td>
+      <td>0.920</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>23.434</td>
+      <td>58.775</td>
+      <td>230.863</td>
+      <td>238.744</td>
+      <td>-7.881</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>23.993</td>
+      <td>25.854</td>
+      <td>106.160</td>
+      <td>109.359</td>
+      <td>-3.199</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>23.375</td>
+      <td>68.297</td>
+      <td>277.502</td>
+      <td>276.165</td>
+      <td>1.336</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>1</td>
+      <td>23.233</td>
+      <td>37.481</td>
+      <td>148.314</td>
+      <td>155.056</td>
+      <td>-6.741</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>1</td>
+      <td>24.162</td>
+      <td>49.542</td>
+      <td>197.562</td>
+      <td>202.456</td>
+      <td>-4.895</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>1</td>
+      <td>23.667</td>
+      <td>34.101</td>
+      <td>138.537</td>
+      <td>141.770</td>
+      <td>-3.232</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>1</td>
+      <td>24.056</td>
+      <td>33.901</td>
+      <td>137.969</td>
+      <td>140.983</td>
+      <td>-3.014</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>1</td>
+      <td>22.786</td>
+      <td>29.242</td>
+      <td>117.410</td>
+      <td>122.674</td>
+      <td>-5.263</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>2</td>
+      <td>23.785</td>
+      <td>39.506</td>
+      <td>164.442</td>
+      <td>163.013</td>
+      <td>1.429</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>2</td>
+      <td>22.987</td>
+      <td>43.004</td>
+      <td>181.044</td>
+      <td>176.759</td>
+      <td>4.285</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>2</td>
+      <td>23.799</td>
+      <td>53.226</td>
+      <td>222.179</td>
+      <td>216.933</td>
+      <td>5.246</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>2</td>
+      <td>23.661</td>
+      <td>54.467</td>
+      <td>227.010</td>
+      <td>221.813</td>
+      <td>5.198</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>2</td>
+      <td>23.852</td>
+      <td>57.549</td>
+      <td>232.496</td>
+      <td>233.925</td>
+      <td>-1.429</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>2</td>
+      <td>23.379</td>
+      <td>61.204</td>
+      <td>253.557</td>
+      <td>248.288</td>
+      <td>5.269</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>2</td>
+      <td>24.146</td>
+      <td>31.489</td>
+      <td>139.894</td>
+      <td>131.506</td>
+      <td>8.388</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>2</td>
+      <td>24.187</td>
+      <td>68.476</td>
+      <td>273.931</td>
+      <td>276.871</td>
+      <td>-2.940</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>2</td>
+      <td>24.159</td>
+      <td>51.144</td>
+      <td>207.969</td>
+      <td>208.753</td>
+      <td>-0.784</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>2</td>
+      <td>23.803</td>
+      <td>68.774</td>
+      <td>280.205</td>
+      <td>278.040</td>
+      <td>2.165</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>3</td>
+      <td>24.381</td>
+      <td>55.350</td>
+      <td>227.060</td>
+      <td>225.282</td>
+      <td>1.779</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>3</td>
+      <td>24.027</td>
+      <td>44.692</td>
+      <td>180.605</td>
+      <td>183.396</td>
+      <td>-2.791</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>3</td>
+      <td>24.342</td>
+      <td>50.995</td>
+      <td>206.229</td>
+      <td>208.167</td>
+      <td>-1.938</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>3</td>
+      <td>23.670</td>
+      <td>21.602</td>
+      <td>91.464</td>
+      <td>92.649</td>
+      <td>-1.186</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>3</td>
+      <td>24.246</td>
+      <td>54.673</td>
+      <td>223.869</td>
+      <td>222.622</td>
+      <td>1.247</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>26</td>
+      <td>3</td>
+      <td>25.082</td>
+      <td>41.449</td>
+      <td>172.910</td>
+      <td>170.651</td>
+      <td>2.259</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27</td>
+      <td>3</td>
+      <td>24.575</td>
+      <td>35.451</td>
+      <td>152.073</td>
+      <td>147.075</td>
+      <td>4.998</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>3</td>
+      <td>23.803</td>
+      <td>42.989</td>
+      <td>169.427</td>
+      <td>176.703</td>
+      <td>-7.276</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>3</td>
+      <td>24.660</td>
+      <td>48.599</td>
+      <td>192.561</td>
+      <td>198.748</td>
+      <td>-6.188</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>3</td>
+      <td>24.097</td>
+      <td>21.448</td>
+      <td>94.448</td>
+      <td>92.042</td>
+      <td>2.406</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>31</td>
+      <td>4</td>
+      <td>22.816</td>
+      <td>56.982</td>
+      <td>222.794</td>
+      <td>231.697</td>
+      <td>-8.902</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>32</td>
+      <td>4</td>
+      <td>24.167</td>
+      <td>47.901</td>
+      <td>199.003</td>
+      <td>196.008</td>
+      <td>2.996</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33</td>
+      <td>4</td>
+      <td>22.712</td>
+      <td>40.285</td>
+      <td>168.668</td>
+      <td>166.077</td>
+      <td>2.592</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>34</td>
+      <td>4</td>
+      <td>23.611</td>
+      <td>25.609</td>
+      <td>109.387</td>
+      <td>108.397</td>
+      <td>0.990</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>35</td>
+      <td>4</td>
+      <td>23.354</td>
+      <td>22.971</td>
+      <td>98.445</td>
+      <td>98.029</td>
+      <td>0.416</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36</td>
+      <td>4</td>
+      <td>23.669</td>
+      <td>25.838</td>
+      <td>110.987</td>
+      <td>109.295</td>
+      <td>1.692</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>37</td>
+      <td>4</td>
+      <td>23.965</td>
+      <td>49.127</td>
+      <td>202.662</td>
+      <td>200.826</td>
+      <td>1.835</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>4</td>
+      <td>22.917</td>
+      <td>54.936</td>
+      <td>224.773</td>
+      <td>223.653</td>
+      <td>1.120</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>39</td>
+      <td>4</td>
+      <td>23.546</td>
+      <td>50.917</td>
+      <td>216.058</td>
+      <td>207.859</td>
+      <td>8.199</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>4</td>
+      <td>24.450</td>
+      <td>41.976</td>
+      <td>171.469</td>
+      <td>172.720</td>
+      <td>-1.251</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The default plot is not that nice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_40_0.png" src="../_images/pandas-intro_40_0.png" />
+</div>
+</div>
+<p>The default is to plot each column vs the index, which is not that helpful for us. Say we just want to plot the pressure vs. the temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Pressure&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_42_0.png" src="../_images/pandas-intro_42_0.png" />
+</div>
+</div>
+<p>We can add multiple plots to a figure, but we have to tell the subsequent calls which axes to put them on. To do that, save the first one, and pass it as an argument in subsequent plots.  That also allows you to fine-tune the plot appearance, e.g. add a y-label. See the <a class="reference external" href="https://matplotlib.org/contents.html">matplotlib documentation</a> to learn how to set all of these.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Pressure&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Fitted Value&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">p1</span><span class="p">)</span>
+
+<span class="n">p1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_44_0.png" src="../_images/pandas-intro_44_0.png" />
+</div>
+</div>
+<p>It is a reasonable question to ask if this is simpler than what we did before using arrays, variables and plotting commands. Dataframes are increasingly common in data science, and are the data structure used in many data science/machine learning projects.</p>
+</div>
+</div>
+<div class="section" id="another-real-life-example">
+<h2>Another real-life example<a class="headerlink" href="#another-real-life-example" title="Permalink to this headline">¶</a></h2>
+<p>LAMMPS is a molecular simulation code used to run molecular dynamics. It outputs a text file that is somewhat challenging to read. There are variable numbers of time steps that depend on how the simulation was setup.</p>
+<p>Start by downloading and opening this file. It is a molecular dynamics trajectory at constant volume, where the pressure, temperature and energy fluctuate.</p>
+<p>Open this file <span class="xref myst">log1.lammps</span>to get a sense for what is in it. The data starts around:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>timestep 0.005
+run ${runSteps}
+run 500000
+Per MPI rank memory allocation (min/avg/max) = 4.427 | 4.427 | 4.427 Mbytes
+Step v_mytime Temp Press Volume PotEng TotEng v_pxy v_pxz v_pyz v_v11 v_v22 v_v33 CPU
+       0            0         1025    601.28429    8894.6478   -1566.6216   -1500.5083    2065.6285    1713.4095    203.00499 1.3408976e-05 9.2260011e-06 1.2951038e-07            0 w
+</pre></div>
+</div>
+<p>And it ends around this line.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  500000         2500    978.62359   -2100.7614    8894.6478   -1570.5382   -1507.4162   -252.80665    614.87398    939.65393 0.00045263648 0.00043970796 0.00044228719    1288.0233
+Loop time of 1288.02 on 1 procs for 500000 steps with 500 atoms
+</pre></div>
+</div>
+<p>Our job is to figure out where those lines are so we can read them into Pandas. There are many ways to do this, but we will stick with a pure Python way. The strategy is to search for the lines, and keep track of their positions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;log1.lammps&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Step v_mytime&quot;</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Loop time of &quot;</span><span class="p">):</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># stop on the previous line</span>
+            <span class="k">break</span>
+<span class="n">start</span><span class="p">,</span> <span class="n">stop</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(69, 2570)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gets tricky. We want to skip the rows up to the starting line. At that point, the line numbers restart as far as Pandas is concerned, so the header is in line 0 then, and the number of rows to read is defined by the stop line minus the start line. The values are separated by multiple spaces, so we use a <em>pattern</em> to indicate multiple spaces. Finally, we prevent the first column from being the index column by setting index_col to be False. See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html%3E">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html&gt;</a>for all the details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;log1.lammps&quot;</span><span class="p">,</span>
+    <span class="n">skiprows</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">nrows</span><span class="o">=</span><span class="n">stop</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span>
+    <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2216/86227813.py:1: ParserWarning: Length of header or names does not match length of data. This leads to a loss of data with index_col=False.
+  df = pd.read_csv(
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Step</th>
+      <th>v_mytime</th>
+      <th>Temp</th>
+      <th>Press</th>
+      <th>Volume</th>
+      <th>PotEng</th>
+      <th>TotEng</th>
+      <th>v_pxy</th>
+      <th>v_pxz</th>
+      <th>v_pyz</th>
+      <th>v_v11</th>
+      <th>v_v22</th>
+      <th>v_v33</th>
+      <th>CPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1025.00000</td>
+      <td>601.28429</td>
+      <td>8894.6478</td>
+      <td>-1566.6216</td>
+      <td>-1500.5083</td>
+      <td>2065.62850</td>
+      <td>1713.409500</td>
+      <td>203.00499</td>
+      <td>0.000013</td>
+      <td>0.000009</td>
+      <td>1.295104e-07</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200</td>
+      <td>1</td>
+      <td>1045.85100</td>
+      <td>-1974.43580</td>
+      <td>8894.6478</td>
+      <td>-1569.6934</td>
+      <td>-1502.2352</td>
+      <td>2530.16720</td>
+      <td>-2203.376800</td>
+      <td>-2193.88770</td>
+      <td>0.000423</td>
+      <td>-0.000564</td>
+      <td>9.109558e-04</td>
+      <td>0.505391</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>400</td>
+      <td>2</td>
+      <td>1050.44480</td>
+      <td>2974.54030</td>
+      <td>8894.6478</td>
+      <td>-1564.3755</td>
+      <td>-1496.6210</td>
+      <td>1446.73930</td>
+      <td>637.829780</td>
+      <td>1794.70610</td>
+      <td>0.001115</td>
+      <td>0.000125</td>
+      <td>4.583668e-04</td>
+      <td>1.018666</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600</td>
+      <td>3</td>
+      <td>1071.37780</td>
+      <td>2386.37510</td>
+      <td>8894.6478</td>
+      <td>-1566.4325</td>
+      <td>-1497.3278</td>
+      <td>599.73943</td>
+      <td>-462.748090</td>
+      <td>558.54192</td>
+      <td>0.000766</td>
+      <td>0.000387</td>
+      <td>3.082071e-04</td>
+      <td>1.532061</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>800</td>
+      <td>4</td>
+      <td>1055.52810</td>
+      <td>-661.78795</td>
+      <td>8894.6478</td>
+      <td>-1569.3172</td>
+      <td>-1501.2348</td>
+      <td>1775.43870</td>
+      <td>-1551.263500</td>
+      <td>-493.01032</td>
+      <td>0.000569</td>
+      <td>0.000380</td>
+      <td>2.913082e-04</td>
+      <td>2.051839</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>499200</td>
+      <td>2496</td>
+      <td>977.95894</td>
+      <td>-1747.91220</td>
+      <td>8894.6478</td>
+      <td>-1570.0162</td>
+      <td>-1506.9370</td>
+      <td>1411.85600</td>
+      <td>1154.883400</td>
+      <td>-2265.50500</td>
+      <td>0.000452</td>
+      <td>0.000440</td>
+      <td>4.424962e-04</td>
+      <td>1285.960300</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>499400</td>
+      <td>2497</td>
+      <td>1066.50870</td>
+      <td>-77.15260</td>
+      <td>8894.6478</td>
+      <td>-1568.3816</td>
+      <td>-1499.5910</td>
+      <td>4071.88400</td>
+      <td>3847.295900</td>
+      <td>-1279.02860</td>
+      <td>0.000452</td>
+      <td>0.000440</td>
+      <td>4.428113e-04</td>
+      <td>1286.474100</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>499600</td>
+      <td>2498</td>
+      <td>1052.18860</td>
+      <td>1958.97410</td>
+      <td>8894.6478</td>
+      <td>-1565.8013</td>
+      <td>-1497.9343</td>
+      <td>-2152.54460</td>
+      <td>925.775780</td>
+      <td>-1162.76120</td>
+      <td>0.000453</td>
+      <td>0.000439</td>
+      <td>4.427215e-04</td>
+      <td>1286.987000</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>499800</td>
+      <td>2499</td>
+      <td>1057.30140</td>
+      <td>-1709.95670</td>
+      <td>8894.6478</td>
+      <td>-1570.6800</td>
+      <td>-1502.4832</td>
+      <td>-1530.34090</td>
+      <td>-71.479217</td>
+      <td>731.44735</td>
+      <td>0.000453</td>
+      <td>0.000440</td>
+      <td>4.423706e-04</td>
+      <td>1287.503200</td>
+    </tr>
+    <tr>
+      <th>2500</th>
+      <td>500000</td>
+      <td>2500</td>
+      <td>978.62359</td>
+      <td>-2100.76140</td>
+      <td>8894.6478</td>
+      <td>-1570.5382</td>
+      <td>-1507.4162</td>
+      <td>-252.80665</td>
+      <td>614.873980</td>
+      <td>939.65393</td>
+      <td>0.000453</td>
+      <td>0.000440</td>
+      <td>4.422872e-04</td>
+      <td>1288.023300</td>
+    </tr>
+  </tbody>
+</table>
+<p>2501 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="section" id="visualizing-the-data">
+<h3>Visualizing the data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="plot-a-column">
+<h4>Plot a column<a class="headerlink" href="#plot-a-column" title="Permalink to this headline">¶</a></h4>
+<p>The effort was worth it though; look how easy it is to plot the data!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Step&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Press&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_54_0.png" src="../_images/pandas-intro_54_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Temp&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;PotEng&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Press&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;PotEng&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_55_0.png" src="../_images/pandas-intro_55_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="plot-distributions-of-a-column">
+<h4>Plot distributions of a column<a class="headerlink" href="#plot-distributions-of-a-column" title="Permalink to this headline">¶</a></h4>
+<p>We can look at histograms of properties as easily.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="s2">&quot;PotEng&quot;</span><span class="p">,</span> <span class="n">xrot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_58_0.png" src="../_images/pandas-intro_58_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="plot-column-correlations">
+<h4>Plot column correlations<a class="headerlink" href="#plot-column-correlations" title="Permalink to this headline">¶</a></h4>
+<p>This is just the beginning of using Pandas. Suppose we want to see which columns are correlated (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a>). With variables this would be tedious.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_61_0.png" src="../_images/pandas-intro_61_0.png" />
+</div>
+</div>
+<p>It can be helpful to see what these correlations mean. Here we plot all the columns against each other. Note, it is not possible to plot a column against itself with Pandas (I think this is a bug <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/22088">https://github.com/pandas-dev/pandas/issues/22088</a>), so here I use matplotlib functions for the plotting. This should be symmetric, so I only plot the upper triangle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># remove axes so it is easier to read</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/pandas-intro_63_0.png" src="../_images/pandas-intro_63_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-parts-of-a-pandas-dataframe">
+<h3>Getting parts of a Pandas DataFrame<a class="headerlink" href="#getting-parts-of-a-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>We have seen how to get a column from a DataFrame like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Press&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        601.28429
+1      -1974.43580
+2       2974.54030
+3       2386.37510
+4       -661.78795
+           ...    
+2496   -1747.91220
+2497     -77.15260
+2498    1958.97410
+2499   -1709.95670
+2500   -2100.76140
+Name: Press, Length: 2501, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this context, the DataFrame is acting like a dictionary. You can get a few columns by using a list of column names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Press&quot;</span><span class="p">,</span> <span class="s2">&quot;PotEng&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Press</th>
+      <th>PotEng</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>601.28429</td>
+      <td>-1566.6216</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1974.43580</td>
+      <td>-1569.6934</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2974.54030</td>
+      <td>-1564.3755</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2386.37510</td>
+      <td>-1566.4325</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-661.78795</td>
+      <td>-1569.3172</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>-1747.91220</td>
+      <td>-1570.0162</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>-77.15260</td>
+      <td>-1568.3816</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>1958.97410</td>
+      <td>-1565.8013</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>-1709.95670</td>
+      <td>-1570.6800</td>
+    </tr>
+    <tr>
+      <th>2500</th>
+      <td>-2100.76140</td>
+      <td>-1570.5382</td>
+    </tr>
+  </tbody>
+</table>
+<p>2501 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>What about a row? This is what we would have done with a numpy array, but it just doesn’t work here.</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>You get a KeyError here.</p>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/indexes/base.py:3653,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3652</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3653</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3654</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/_libs/index.pyx:147,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/_libs/index.pyx:176,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7080,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:7088,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: 0
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/frame.py:3761,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3759</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3760</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3761</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3762</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3763</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/indexes/base.py:3655,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3653</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3654</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3655</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3656</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3657</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3658</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3659</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3660</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The problem is that as a dictionary, the keys are for the <em>columns</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Step&#39;, &#39;v_mytime&#39;, &#39;Temp&#39;, &#39;Press&#39;, &#39;Volume&#39;, &#39;PotEng&#39;, &#39;TotEng&#39;,
+       &#39;v_pxy&#39;, &#39;v_pxz&#39;, &#39;v_pyz&#39;, &#39;v_v11&#39;, &#39;v_v22&#39;, &#39;v_v33&#39;, &#39;CPU&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>One way to get the rows by their integer index is to use the <em>integer location</em> attribute for a row.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step        0.000000e+00
+v_mytime    0.000000e+00
+Temp        1.025000e+03
+Press       6.012843e+02
+Volume      8.894648e+03
+PotEng     -1.566622e+03
+TotEng     -1.500508e+03
+v_pxy       2.065628e+03
+v_pxz       1.713409e+03
+v_pyz       2.030050e+02
+v_v11       1.340898e-05
+v_v22       9.226001e-06
+v_v33       1.295104e-07
+CPU         0.000000e+00
+Name: 0, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use slices on this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Step</th>
+      <th>v_mytime</th>
+      <th>Temp</th>
+      <th>Press</th>
+      <th>Volume</th>
+      <th>PotEng</th>
+      <th>TotEng</th>
+      <th>v_pxy</th>
+      <th>v_pxz</th>
+      <th>v_pyz</th>
+      <th>v_v11</th>
+      <th>v_v22</th>
+      <th>v_v33</th>
+      <th>CPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1025.0000</td>
+      <td>601.28429</td>
+      <td>8894.6478</td>
+      <td>-1566.6216</td>
+      <td>-1500.5083</td>
+      <td>2065.62850</td>
+      <td>1713.40950</td>
+      <td>203.00499</td>
+      <td>0.000013</td>
+      <td>0.000009</td>
+      <td>1.295104e-07</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200</td>
+      <td>1</td>
+      <td>1045.8510</td>
+      <td>-1974.43580</td>
+      <td>8894.6478</td>
+      <td>-1569.6934</td>
+      <td>-1502.2352</td>
+      <td>2530.16720</td>
+      <td>-2203.37680</td>
+      <td>-2193.88770</td>
+      <td>0.000423</td>
+      <td>-0.000564</td>
+      <td>9.109558e-04</td>
+      <td>0.505391</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>400</td>
+      <td>2</td>
+      <td>1050.4448</td>
+      <td>2974.54030</td>
+      <td>8894.6478</td>
+      <td>-1564.3755</td>
+      <td>-1496.6210</td>
+      <td>1446.73930</td>
+      <td>637.82978</td>
+      <td>1794.70610</td>
+      <td>0.001115</td>
+      <td>0.000125</td>
+      <td>4.583668e-04</td>
+      <td>1.018666</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600</td>
+      <td>3</td>
+      <td>1071.3778</td>
+      <td>2386.37510</td>
+      <td>8894.6478</td>
+      <td>-1566.4325</td>
+      <td>-1497.3278</td>
+      <td>599.73943</td>
+      <td>-462.74809</td>
+      <td>558.54192</td>
+      <td>0.000766</td>
+      <td>0.000387</td>
+      <td>3.082071e-04</td>
+      <td>1.532061</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>800</td>
+      <td>4</td>
+      <td>1055.5281</td>
+      <td>-661.78795</td>
+      <td>8894.6478</td>
+      <td>-1569.3172</td>
+      <td>-1501.2348</td>
+      <td>1775.43870</td>
+      <td>-1551.26350</td>
+      <td>-493.01032</td>
+      <td>0.000569</td>
+      <td>0.000380</td>
+      <td>2.913082e-04</td>
+      <td>2.051839</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This example may be a little confusing, because our index does include 0, so we can in this case also use the row label with the <em>location</em> attribute. You can use any value in the index for this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RangeIndex(start=0, stop=2501, step=1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step        0.000000e+00
+v_mytime    0.000000e+00
+Temp        1.025000e+03
+Press       6.012843e+02
+Volume      8.894648e+03
+PotEng     -1.566622e+03
+TotEng     -1.500508e+03
+v_pxy       2.065628e+03
+v_pxz       1.713409e+03
+v_pyz       2.030050e+02
+v_v11       1.340898e-05
+v_v22       9.226001e-06
+v_v33       1.295104e-07
+CPU         0.000000e+00
+Name: 0, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can access the first five rows like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Step</th>
+      <th>v_mytime</th>
+      <th>Temp</th>
+      <th>Press</th>
+      <th>Volume</th>
+      <th>PotEng</th>
+      <th>TotEng</th>
+      <th>v_pxy</th>
+      <th>v_pxz</th>
+      <th>v_pyz</th>
+      <th>v_v11</th>
+      <th>v_v22</th>
+      <th>v_v33</th>
+      <th>CPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1025.0000</td>
+      <td>601.28429</td>
+      <td>8894.6478</td>
+      <td>-1566.6216</td>
+      <td>-1500.5083</td>
+      <td>2065.62850</td>
+      <td>1713.40950</td>
+      <td>203.00499</td>
+      <td>0.000013</td>
+      <td>0.000009</td>
+      <td>1.295104e-07</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>200</td>
+      <td>1</td>
+      <td>1045.8510</td>
+      <td>-1974.43580</td>
+      <td>8894.6478</td>
+      <td>-1569.6934</td>
+      <td>-1502.2352</td>
+      <td>2530.16720</td>
+      <td>-2203.37680</td>
+      <td>-2193.88770</td>
+      <td>0.000423</td>
+      <td>-0.000564</td>
+      <td>9.109558e-04</td>
+      <td>0.505391</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>400</td>
+      <td>2</td>
+      <td>1050.4448</td>
+      <td>2974.54030</td>
+      <td>8894.6478</td>
+      <td>-1564.3755</td>
+      <td>-1496.6210</td>
+      <td>1446.73930</td>
+      <td>637.82978</td>
+      <td>1794.70610</td>
+      <td>0.001115</td>
+      <td>0.000125</td>
+      <td>4.583668e-04</td>
+      <td>1.018666</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>600</td>
+      <td>3</td>
+      <td>1071.3778</td>
+      <td>2386.37510</td>
+      <td>8894.6478</td>
+      <td>-1566.4325</td>
+      <td>-1497.3278</td>
+      <td>599.73943</td>
+      <td>-462.74809</td>
+      <td>558.54192</td>
+      <td>0.000766</td>
+      <td>0.000387</td>
+      <td>3.082071e-04</td>
+      <td>1.532061</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>800</td>
+      <td>4</td>
+      <td>1055.5281</td>
+      <td>-661.78795</td>
+      <td>8894.6478</td>
+      <td>-1569.3172</td>
+      <td>-1501.2348</td>
+      <td>1775.43870</td>
+      <td>-1551.26350</td>
+      <td>-493.01032</td>
+      <td>0.000569</td>
+      <td>0.000380</td>
+      <td>2.913082e-04</td>
+      <td>2.051839</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And a slice of a column like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Press&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     601.28429
+1   -1974.43580
+2    2974.54030
+3    2386.37510
+4    -661.78795
+Name: Press, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can access a value in a row and column with the <code class="docutils literal notranslate"><span class="pre">at</span></code> function on a DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Press&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2974.5403
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or if you know the row and column numbers you can use <code class="docutils literal notranslate"><span class="pre">iat</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2974.5403
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="operating-on-columns-in-the-dataframe">
+<h3>Operating on columns in the DataFrame<a class="headerlink" href="#operating-on-columns-in-the-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>Some functions just work across the columns. For example, DataFrames have statistics functions like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step        250000.000000
+v_mytime      1250.000000
+Temp          1025.136938
+Press          188.035304
+Volume        8894.647800
+PotEng       -1567.935373
+TotEng       -1501.813207
+v_pxy           16.669575
+v_pxz           -4.852837
+v_pyz           14.175372
+v_v11            0.000465
+v_v22            0.000429
+v_v33            0.000428
+CPU            644.103768
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should tread carefully with other functions that work on arrays. For example consider this example that computes the mean of an entire array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>It does not do the same thing on a DataFrame. The index and column labels are preserved with numpy functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># takes mean along axis 0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18497.01204734716
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>500000.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/internals/blocks.py:329: RuntimeWarning: overflow encountered in exp
+  result = func(self.values, **kwargs)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Step</th>
+      <th>v_mytime</th>
+      <th>Temp</th>
+      <th>Press</th>
+      <th>Volume</th>
+      <th>PotEng</th>
+      <th>TotEng</th>
+      <th>v_pxy</th>
+      <th>v_pxz</th>
+      <th>v_pyz</th>
+      <th>v_v11</th>
+      <th>v_v22</th>
+      <th>v_v33</th>
+      <th>CPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.000000e+00</td>
+      <td>1.000000</td>
+      <td>inf</td>
+      <td>1.362854e+261</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>1.458636e+88</td>
+      <td>1.000013</td>
+      <td>1.000009</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.225974e+86</td>
+      <td>2.718282</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>1.000423</td>
+      <td>0.999436</td>
+      <td>1.000911</td>
+      <td>1.657634</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5.221470e+173</td>
+      <td>7.389056</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>1.013804e+277</td>
+      <td>inf</td>
+      <td>1.001116</td>
+      <td>1.000125</td>
+      <td>1.000458</td>
+      <td>2.769498</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.773020e+260</td>
+      <td>20.085537</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.907536e+260</td>
+      <td>1.074133e-201</td>
+      <td>3.729699e+242</td>
+      <td>1.000766</td>
+      <td>1.000387</td>
+      <td>1.000308</td>
+      <td>4.627705</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>inf</td>
+      <td>54.598150</td>
+      <td>inf</td>
+      <td>3.882801e-288</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>7.732831e-215</td>
+      <td>1.000569</td>
+      <td>1.000380</td>
+      <td>1.000291</td>
+      <td>7.782200</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>1.000452</td>
+      <td>1.000440</td>
+      <td>1.000443</td>
+      <td>inf</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>3.112086e-34</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>1.000452</td>
+      <td>1.000440</td>
+      <td>1.000443</td>
+      <td>inf</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>1.000453</td>
+      <td>1.000439</td>
+      <td>1.000443</td>
+      <td>inf</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000e+00</td>
+      <td>9.056711e-32</td>
+      <td>inf</td>
+      <td>1.000453</td>
+      <td>1.000440</td>
+      <td>1.000442</td>
+      <td>inf</td>
+    </tr>
+    <tr>
+      <th>2500</th>
+      <td>inf</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.000000e+00</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.612378e-110</td>
+      <td>1.087368e+267</td>
+      <td>inf</td>
+      <td>1.000453</td>
+      <td>1.000440</td>
+      <td>1.000442</td>
+      <td>inf</td>
+    </tr>
+  </tbody>
+</table>
+<p>2501 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">*</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Step</th>
+      <th>v_mytime</th>
+      <th>Temp</th>
+      <th>Press</th>
+      <th>Volume</th>
+      <th>PotEng</th>
+      <th>TotEng</th>
+      <th>v_pxy</th>
+      <th>v_pxz</th>
+      <th>v_pyz</th>
+      <th>v_v11</th>
+      <th>v_v22</th>
+      <th>v_v33</th>
+      <th>CPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2050.00000</td>
+      <td>1202.56858</td>
+      <td>17789.2956</td>
+      <td>-3133.2432</td>
+      <td>-3001.0166</td>
+      <td>4131.25700</td>
+      <td>3426.819000</td>
+      <td>406.00998</td>
+      <td>0.000027</td>
+      <td>0.000018</td>
+      <td>2.590208e-07</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>400</td>
+      <td>2</td>
+      <td>2091.70200</td>
+      <td>-3948.87160</td>
+      <td>17789.2956</td>
+      <td>-3139.3868</td>
+      <td>-3004.4704</td>
+      <td>5060.33440</td>
+      <td>-4406.753600</td>
+      <td>-4387.77540</td>
+      <td>0.000846</td>
+      <td>-0.001128</td>
+      <td>1.821912e-03</td>
+      <td>1.010782</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>800</td>
+      <td>4</td>
+      <td>2100.88960</td>
+      <td>5949.08060</td>
+      <td>17789.2956</td>
+      <td>-3128.7510</td>
+      <td>-2993.2420</td>
+      <td>2893.47860</td>
+      <td>1275.659560</td>
+      <td>3589.41220</td>
+      <td>0.002231</td>
+      <td>0.000249</td>
+      <td>9.167335e-04</td>
+      <td>2.037332</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1200</td>
+      <td>6</td>
+      <td>2142.75560</td>
+      <td>4772.75020</td>
+      <td>17789.2956</td>
+      <td>-3132.8650</td>
+      <td>-2994.6556</td>
+      <td>1199.47886</td>
+      <td>-925.496180</td>
+      <td>1117.08384</td>
+      <td>0.001531</td>
+      <td>0.000774</td>
+      <td>6.164143e-04</td>
+      <td>3.064122</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1600</td>
+      <td>8</td>
+      <td>2111.05620</td>
+      <td>-1323.57590</td>
+      <td>17789.2956</td>
+      <td>-3138.6344</td>
+      <td>-3002.4696</td>
+      <td>3550.87740</td>
+      <td>-3102.527000</td>
+      <td>-986.02064</td>
+      <td>0.001137</td>
+      <td>0.000760</td>
+      <td>5.826165e-04</td>
+      <td>4.103678</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2496</th>
+      <td>998400</td>
+      <td>4992</td>
+      <td>1955.91788</td>
+      <td>-3495.82440</td>
+      <td>17789.2956</td>
+      <td>-3140.0324</td>
+      <td>-3013.8740</td>
+      <td>2823.71200</td>
+      <td>2309.766800</td>
+      <td>-4531.01000</td>
+      <td>0.000905</td>
+      <td>0.000880</td>
+      <td>8.849924e-04</td>
+      <td>2571.920600</td>
+    </tr>
+    <tr>
+      <th>2497</th>
+      <td>998800</td>
+      <td>4994</td>
+      <td>2133.01740</td>
+      <td>-154.30520</td>
+      <td>17789.2956</td>
+      <td>-3136.7632</td>
+      <td>-2999.1820</td>
+      <td>8143.76800</td>
+      <td>7694.591800</td>
+      <td>-2558.05720</td>
+      <td>0.000905</td>
+      <td>0.000879</td>
+      <td>8.856225e-04</td>
+      <td>2572.948200</td>
+    </tr>
+    <tr>
+      <th>2498</th>
+      <td>999200</td>
+      <td>4996</td>
+      <td>2104.37720</td>
+      <td>3917.94820</td>
+      <td>17789.2956</td>
+      <td>-3131.6026</td>
+      <td>-2995.8686</td>
+      <td>-4305.08920</td>
+      <td>1851.551560</td>
+      <td>-2325.52240</td>
+      <td>0.000906</td>
+      <td>0.000879</td>
+      <td>8.854430e-04</td>
+      <td>2573.974000</td>
+    </tr>
+    <tr>
+      <th>2499</th>
+      <td>999600</td>
+      <td>4998</td>
+      <td>2114.60280</td>
+      <td>-3419.91340</td>
+      <td>17789.2956</td>
+      <td>-3141.3600</td>
+      <td>-3004.9664</td>
+      <td>-3060.68180</td>
+      <td>-142.958434</td>
+      <td>1462.89470</td>
+      <td>0.000905</td>
+      <td>0.000879</td>
+      <td>8.847412e-04</td>
+      <td>2575.006400</td>
+    </tr>
+    <tr>
+      <th>2500</th>
+      <td>1000000</td>
+      <td>5000</td>
+      <td>1957.24718</td>
+      <td>-4201.52280</td>
+      <td>17789.2956</td>
+      <td>-3141.0764</td>
+      <td>-3014.8324</td>
+      <td>-505.61330</td>
+      <td>1229.747960</td>
+      <td>1879.30786</td>
+      <td>0.000905</td>
+      <td>0.000879</td>
+      <td>8.845744e-04</td>
+      <td>2576.046600</td>
+    </tr>
+  </tbody>
+</table>
+<p>2501 rows × 14 columns</p>
+</div></div></div>
+</div>
+<p>We can apply a function to the DataFrame. The default is the columns (axis=0). Either way, we get a new DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">minmax</span><span class="p">(</span><span class="n">roworcolumn</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">roworcolumn</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">roworcolumn</span><span class="p">)</span>
+
+
+<span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Step</th>
+      <th>v_mytime</th>
+      <th>Temp</th>
+      <th>Press</th>
+      <th>Volume</th>
+      <th>PotEng</th>
+      <th>TotEng</th>
+      <th>v_pxy</th>
+      <th>v_pxz</th>
+      <th>v_pyz</th>
+      <th>v_v11</th>
+      <th>v_v22</th>
+      <th>v_v33</th>
+      <th>CPU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>883.05875</td>
+      <td>-6247.6768</td>
+      <td>8894.6478</td>
+      <td>-1576.8745</td>
+      <td>-1513.6955</td>
+      <td>-6747.6227</td>
+      <td>-7547.8097</td>
+      <td>-7509.4468</td>
+      <td>0.000013</td>
+      <td>-0.000564</td>
+      <td>1.295104e-07</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>500000</td>
+      <td>2500</td>
+      <td>1154.17900</td>
+      <td>6673.7634</td>
+      <td>8894.6478</td>
+      <td>-1559.1555</td>
+      <td>-1488.9586</td>
+      <td>7428.1767</td>
+      <td>6523.4548</td>
+      <td>6229.5043</td>
+      <td>0.001115</td>
+      <td>0.000531</td>
+      <td>9.109558e-04</td>
+      <td>1288.0233</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here we analyze across the rows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minmax</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       (-1566.6216, 8894.6478)
+1       (-2203.3768, 8894.6478)
+2       (-1564.3755, 8894.6478)
+3       (-1566.4325, 8894.6478)
+4       (-1569.3172, 8894.6478)
+                 ...           
+2496      (-2265.505, 499200.0)
+2497     (-1568.3816, 499400.0)
+2498     (-2152.5446, 499600.0)
+2499     (-1709.9567, 499800.0)
+2500     (-2100.7614, 500000.0)
+Length: 2501, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Pandas is a multipurpose data science tool. In many ways it is like a numpy array, and in many ways it is different. In some ways it is like a dictionary.</p>
+<p>The similarities include the ability to do some indexing and slicing. This is only a partial similarity though.</p>
+<p>The differences include integrated plotting.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./02-pandas-intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../01-numpy/numpy.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction to data files</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../03-intermediate-pandas/intermediate-pandas.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Intermediate Pandas</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By John Kitchin<br/>
+    
+        &copy; Copyright 2023.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
