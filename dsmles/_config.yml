@@ -40,10 +40,6 @@ html:
       repo: jkitchin/dsmles
     hypothesis: true
       
-      
-parse:
-  myst_substitutions:
-    pycse: "[pycse](https://kitchingroup.cheme.cmu.edu/pycse)"
 
 parse:
   myst_enable_extensions:
@@ -52,6 +48,8 @@ parse:
     - amsmath
     - dollarmath
     - linkify
+  myst_substitutions:
+    pycse: "[pycse](https://kitchingroup.cheme.cmu.edu/pycse)"    
     
 launch_buttons:
   notebook_interface        : jupyterlab  # The interface interactive links will activate ["classic", "jupyterlab"]
