@@ -48,8 +48,7 @@ parse:
     - amsmath
     - dollarmath
     - linkify
-  myst_substitutions:
-    pycse: "[pycse](https://kitchingroup.cheme.cmu.edu/pycse)"    
+  
     
 launch_buttons:
   notebook_interface        : jupyterlab  # The interface interactive links will activate ["classic", "jupyterlab"]
