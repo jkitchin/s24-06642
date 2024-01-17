@@ -17,4 +17,11 @@ chapters:
 - file: 09-custom-estimators/custom-estimators.ipynb
 - file: summary.md
 - file: genindex.md
-- file: build-statistics.md
+
+- caption: Assignments
+  chapters:
+    - glob: assignments/*
+    
+- caption: About the book
+  chapters:
+    - file: execution-statistics.md   
