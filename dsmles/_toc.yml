@@ -27,4 +27,4 @@ parts:
     
 - caption: About the book
   chapters:
-    - file: execution-statistics.md   
+    - file: build-statistics.md   
