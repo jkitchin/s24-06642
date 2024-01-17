@@ -3,6 +3,9 @@
 
 format: jb-book
 root: intro
+
+parts:
+- caption: Lectures
   chapters:
     - file: syllabus.ipynb
     - file: 00-introduction/introduction.ipynb
