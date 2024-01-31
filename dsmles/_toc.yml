@@ -23,7 +23,7 @@ parts:
 
 - caption: Assignments
   chapters:
-    - glob: assignments/*
+    - glob: assignments/**/*
     
 - caption: About the book
   chapters:
