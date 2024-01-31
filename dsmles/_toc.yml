@@ -3,7 +3,6 @@
 
 format: jb-book
 root: intro
-exclude_patterns: [template.ipynb]
 
 parts:
 - caption: Lectures
